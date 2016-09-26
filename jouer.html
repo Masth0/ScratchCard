@@ -14,7 +14,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="./css/style.css">
-
+    <!--  Scripts  -->
     <script src="./js/Scratch.js"></script>
 </head>
 
@@ -39,16 +39,16 @@
 
         var test = new Scratch({
             canvasId: 'js-scratch-canvas', // L'id de l'élément canvas
-            imageBackground: 'http://fakeimg.pl/250x250/#FF0000', // image en dessous de celle grattée
-            pictureOver: './images/scratch-over.jpg', // Chemin de l'image a gratter
+            imageBackground: './images/loose.jpg', // image en dessous de celle grattée
+            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
             nPoints: 200,
             pointSize: { x: 3, y: 3}
         });
 
         var test2 = new Scratch({
             canvasId: 'js-scratch-canvas-2', // L'id de l'élément canvas
-            imageBackground: 'http://fakeimg.pl/250x250/', // image en dessous de celle grattée
-            pictureOver: './images/scratch-over.jpg', // Chemin de l'image a gratter
+            imageBackground: './images/win.jpg', // image en dessous de celle grattée
+            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
             nPoints: 10,
             radius: 10,
             pointSize: { x: 5, y: 5 }

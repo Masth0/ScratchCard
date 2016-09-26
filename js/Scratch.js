@@ -100,11 +100,13 @@ var Scratch = (function () {
 
 	};
 
+	// Update positions etc of canvas
 	Scratch.prototype.update = function() {
 		this.zone = this.canvas.getBoundingClientRect();
 	};
 
 	Scratch.prototype.setBackground = function() {
+		var _this = this;
 		this.image.onload = function() {
 			_this.zone = _this.canvas.getBoundingClientRect();
 			// If DOMContentLoaded draw image
@@ -184,7 +186,7 @@ var Scratch = (function () {
 	};
 
 	Scratch.prototype.isFinish = function(value) {
-		return finish = (value >= 400) ? true : false;
+		// TODO ...
 	};
 
 	return Scratch;
