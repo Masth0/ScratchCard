@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <!-- Title -->
+    <title> </title>
+    <!-- Description -->
+    <meta name="description" content="">
+    <!-- Index, Follow -->
+    <meta name="robots" content="noindex,nofollow" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script src="./js/Scratch.js"></script>
+</head>
+
+<body>
+
+    <div class="scratch_container">
+        <div class="scratch_viewport">
+            <!-- result picture -->
+            <canvas id="js-scratch-canvas"></canvas>
+        </div>
+        <p id="js-scratch-percent"></p>
+
+        <div class="scratch_viewport">
+            <!-- result picture -->
+            <canvas id="js-scratch-canvas-2"></canvas>
+        </div>
+        <p id="js-scratch-percent-2"></p>
+    </div>
+    
+
+    <script type="text/javascript">
+
+        var test = new Scratch({
+            canvasId: 'js-scratch-canvas', // L'id de l'élément canvas
+            imageBackground: './images/loose.jpg', // image en dessous de celle grattée
+            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
+            cursor: {
+                paths: ['./images/piece.png']
+            },
+            nPoints: 200,
+            pointSize: { x: 3, y: 3}
+        });
+
+        var test2 = new Scratch({
+            canvasId: 'js-scratch-canvas-2', // L'id de l'élément canvas
+            imageBackground: './images/win.jpg', // image en dessous de celle grattée
+            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
+            cursor: ['./images/piece.png', 'default'],
+            nPoints: 10,
+            radius: 10,
+            pointSize: { x: 5, y: 5 }
+        });
+
+        console.log(test);
+
+    </script>
+
+<!-- No javascript -->
+    <noscript>
+        <p class="browserupgrade">
+            Votre navigateur ne supporte pas ou &agrave; desactiv&eacute; javascript.
+            <br>
+            L'application ne peut pas fonctionner correctement.
+            <br>
+            Pour acc&eacute;der au site veuillez activer javascript.
+        </p>
+    </noscript>
+<!-- No javascript end -->
+
+</body>
+</html>

@@ -34,7 +34,12 @@ var Scratch = (function () {
     	canvasId: '', // Canvas id
       imageBackground: '', // Path [src]
       pictureOver: '', // Path [src]
-			cursor: '', // Custom pointer path
+			cursor: {
+				paths: [],
+				x: 0,
+				y:0,
+				default: 'default'
+			}, // Custom pointer
       sceneWidth: 250, // Canvas width
       sceneHeight: 250, // Canvas height
       radius: 40, // Radius of scratch zone
@@ -67,6 +72,7 @@ var Scratch = (function () {
 
 		// Set background after draw the canvas
 		this.setBackground();
+		this.setCursor(this.options.cursor.paths);
 
 		var scratchMove = function(e) {
 			e.preventDefault();
@@ -100,7 +106,17 @@ var Scratch = (function () {
 
 	};
 
-	// Update positions etc of canvas
+	// Faire le cuseur ... :)
+	Scratch.prototype.setCursor = function(paths) {
+		var i = 0;
+		var len = paths.length;
+		var string = '';
+		paths.forEach(function(path) {
+			string += ' url(' + path + ')';
+		});
+		this.canvas.setAttribute('style', 'cursor:' + string + ';');
+	};
+
 	Scratch.prototype.update = function() {
 		this.zone = this.canvas.getBoundingClientRect();
 	};
@@ -186,7 +202,7 @@ var Scratch = (function () {
 	};
 
 	Scratch.prototype.isFinish = function(value) {
-		// TODO ...
+		return finish = (value >= 400) ? true : false;
 	};
 
 	return Scratch;
