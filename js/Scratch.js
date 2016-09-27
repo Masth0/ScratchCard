@@ -30,29 +30,33 @@ var Scratch = (function () {
 	 * @constructor
 	 */
 	var Scratch = function(options) {
+		this.cursor = {
+			paths: [],
+				x: 0,
+				y: 0,
+				default: 'auto'
+		};
+		this.pointSize = {
+			x: 5,
+			y: 5
+		};
     this.defaults = {
     	canvasId: '', // Canvas id
       imageBackground: '', // Path [src]
       pictureOver: '', // Path [src]
-			cursor: {
-				paths: [],
-				x: 0,
-				y:0,
-				default: 'default'
-			}, // Custom pointer
+			cursor: this.cursor, // Custom pointer
       sceneWidth: 250, // Canvas width
       sceneHeight: 250, // Canvas height
       radius: 40, // Radius of scratch zone
       nPoints: 10, // n points for clear canvas
-			pointSize: {
-				x: 5,
-				y: 5
-			},
+			pointSize: this.pointSize,
 			percent: null,
 			callback: null
    	};
 
    	this.options = mergeOptions(this.defaults, options);
+   	this.options.cursor = mergeOptions(this.cursor, options.cursor);
+   	this.options.pointSize = mergeOptions(this.pointSize, options.pointSize);
 
    	// init Scratch
 		this.init();
@@ -66,7 +70,7 @@ var Scratch = (function () {
 		this.canvas.height = this.options.sceneHeight;
 		this.image = new Image();
 		this.image.src = this.options.pictureOver;
-		this.percent = this.getPercent();
+		this.percent = 0;
 		this.zone = null;
 		this.pixelRatio = window.devicePixelRatio;
 
@@ -111,9 +115,18 @@ var Scratch = (function () {
 		var i = 0;
 		var len = paths.length;
 		var string = '';
-		paths.forEach(function(path) {
-			string += ' url(' + path + ')';
-		});
+		for (i; i < len; i++) {
+			var url;
+			if (i === len-1) {
+				url = 'url(' +  paths[i] + ') ';
+			} else {
+				url = 'url(' +  paths[i] + '), ';
+			}
+			string += url;
+		}
+		string += this.options.cursor.x + ' ';
+		string += this.options.cursor.y + ',';
+		string += this.options.cursor.default;
 		this.canvas.setAttribute('style', 'cursor:' + string + ';');
 	};
 
@@ -155,7 +168,7 @@ var Scratch = (function () {
 
 	Scratch.prototype.getPosition = function(e) {
 		var posX, posY;
-		switch(e.type) {
+		switch (e.type) {
 			case 'touchmove':
 				posX = e.touches[0].clientX - this.options.radius - window.pageXOffset;
 				posY = e.touches[0].clientY - this.options.radius - window.pageYOffset;
@@ -186,6 +199,7 @@ var Scratch = (function () {
 	};
 
 	Scratch.prototype.getPercent = function() {
+		var percent;
 	  var counter = 0; // number of pixels clear
 		var imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
 		var imageDataLength = imageData.data.length;
@@ -196,8 +210,11 @@ var Scratch = (function () {
       }
 		}
 
-		var percent = (counter / (this.canvas.width * this.canvas.height)) * 100;
-		console.log('percent ===', percent);
+		if (counter >= 1) {
+			percent = (counter / (this.canvas.width * this.canvas.height)) * 100;
+		} else {
+			percent = 0;
+		}
 		return percent;
 	};
 

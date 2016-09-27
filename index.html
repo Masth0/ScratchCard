@@ -20,45 +20,31 @@
 
 <body>
 
+    <h1 class="title-main">ScratchCard</h1>
+
     <div class="scratch_container">
         <div class="scratch_viewport">
             <!-- result picture -->
             <canvas id="js-scratch-canvas"></canvas>
         </div>
-        <p id="js-scratch-percent"></p>
-
-        <div class="scratch_viewport">
-            <!-- result picture -->
-            <canvas id="js-scratch-canvas-2"></canvas>
-        </div>
-        <p id="js-scratch-percent-2"></p>
     </div>
     
 
     <script type="text/javascript">
 
-        var test = new Scratch({
-            canvasId: 'js-scratch-canvas', // L'id de l'élément canvas
-            imageBackground: './images/loose.jpg', // image en dessous de celle grattée
-            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
+        var scratch = new Scratch({
+            canvasId: 'js-scratch-canvas',
+            imageBackground: './images/loose.jpg',
+            pictureOver: './images/foreground.jpg',
             cursor: {
-                paths: ['./images/piece.png']
+                paths: ['./images/piece.png'],
+                x: '20',
+                y: '17'
             },
-            nPoints: 200,
+            radius: 20,
+            nPoints: 100,
             pointSize: { x: 3, y: 3}
         });
-
-        var test2 = new Scratch({
-            canvasId: 'js-scratch-canvas-2', // L'id de l'élément canvas
-            imageBackground: './images/win.jpg', // image en dessous de celle grattée
-            pictureOver: './images/foreground.jpg', // Chemin de l'image a gratter
-            cursor: ['./images/piece.png', 'default'],
-            nPoints: 10,
-            radius: 10,
-            pointSize: { x: 5, y: 5 }
-        });
-
-        console.log(test);
 
     </script>
 

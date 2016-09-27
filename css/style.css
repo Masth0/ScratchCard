@@ -3,16 +3,23 @@ body {
 	padding: 0;
 	margin: 0;
 }
+
+.title-main {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
 .scratch_container {
 	position: relative;
 	margin: 0 auto;
 	max-width: 1024px;
-	border: 1px solid;
 }
 
 .scratch_viewport {
 	position: relative;
-	border: 5px solid grey;
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
 	z-index: 0;
 }
 
