@@ -31,7 +31,8 @@ var Scratch = (function () {
 	 */
 	var Scratch = function(options) {
 		this.cursor = {
-			paths: [],
+			png: '', // Modern browsers
+			cur: '', // for IE
 				x: 0,
 				y: 0,
 				default: 'auto'
@@ -76,7 +77,7 @@ var Scratch = (function () {
 
 		// Set background after draw the canvas
 		this.setBackground();
-		this.setCursor(this.options.cursor.paths);
+		this.setCursor();
 
 		var scratchMove = function(e) {
 			e.preventDefault();
@@ -95,9 +96,13 @@ var Scratch = (function () {
 		this.canvas.addEventListener('mousedown', function(e) {
 		 	_this.canvas.addEventListener('mousemove', scratchMove);
 		});
-		this.canvas.addEventListener('mouseup', function(e) {
+		this.canvas.addEventListener('mouseup', function _func(e) {
 		 _this.canvas.removeEventListener('mousemove', scratchMove);
-		 var finish = _this.isFinish(_this.counter);
+		 var clear = _this.clear();
+      if (clear) {
+        _this.callback(_this.options.callback);
+        _this.canvas.removeEventListener('mouseup', _func);
+      }
 		});
 
 		this.canvas.addEventListener('touchstart', function(e) {
@@ -105,31 +110,28 @@ var Scratch = (function () {
 		});
 		this.canvas.addEventListener('touchend', function(e) {
 		 _this.canvas.removeEventListener('touchmove', scratchMove);
-		 var finish = _this.isFinish(_this.counter);
+		 var clear = _this.clear();
+		  if (clear) {
+        _this.callback(_this.options.callback);
+      }
 		});
 
 	};
 
 	// Faire le cuseur ... :)
-	Scratch.prototype.setCursor = function(paths) {
-		var i = 0;
-		var len = paths.length;
+	Scratch.prototype.setCursor = function() {
 		var string = '';
-		for (i; i < len; i++) {
-			var url;
-			if (i === len-1) {
-				url = 'url(' +  paths[i] + ') ';
-			} else {
-				url = 'url(' +  paths[i] + '), ';
-			}
-			string += url;
-		}
-		string += this.options.cursor.x + ' ';
-		string += this.options.cursor.y + ',';
-		string += this.options.cursor.default;
+
+    if (document.documentElement.classList.contains('is-ie') || navigator.userAgent.indexOf('Edge') != -1) {
+      string += 'url(' + this.options.cursor.cur + '), auto';
+    } else {
+      string += 'url(' + this.options.cursor.png + ') ' + this.options.cursor.x + ' ' + this.options.cursor.y + ', default';
+    }
+
 		this.canvas.setAttribute('style', 'cursor:' + string + ';');
 	};
 
+	// Update positions etc
 	Scratch.prototype.update = function() {
 		this.zone = this.canvas.getBoundingClientRect();
 	};
@@ -138,7 +140,7 @@ var Scratch = (function () {
 		var _this = this;
 		this.image.onload = function() {
 			_this.zone = _this.canvas.getBoundingClientRect();
-			// If DOMContentLoaded draw image
+			// Draw image
 			_this.ctx.drawImage(this, 0, 0);
 			// When the canvas have been drawn
 			var IMG = document.createElement('img');
@@ -196,6 +198,7 @@ var Scratch = (function () {
 			var points = this.clearPoint(x, y);
 			this.ctx.clearRect(points.x, points.y, this.options.pointSize.x, this.options.pointSize.y);
 		}
+		this.percent = this.getPercent();
 	};
 
 	Scratch.prototype.getPercent = function() {
@@ -218,8 +221,17 @@ var Scratch = (function () {
 		return percent;
 	};
 
-	Scratch.prototype.isFinish = function(value) {
-		return finish = (value >= 400) ? true : false;
+	Scratch.prototype.clear = function() {
+		if (this.percent >= this.options.percent) {
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		  return true;
+		}
+	};
+
+	Scratch.prototype.callback = function(callback) {
+		if (callback != null && this.percent >= this.options.percent) {
+			callback();
+		}
 	};
 
 	return Scratch;
