@@ -21,9 +21,3 @@ in modern browsers with touch events support.
 	        **y :** // Move position y  
 	        **cur :** // Path to the .cur for internet explorer  
     }
-
-## Custom cusor for IE
-```
-<!--[if IE]> <html class="is-ie"> <![endif]-->
-<!--[!(IE)]><!--> <html> <!--<![endif]-->
-```

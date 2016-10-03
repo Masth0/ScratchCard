@@ -122,7 +122,7 @@ var Scratch = (function () {
 	Scratch.prototype.setCursor = function() {
 		var string = '';
 
-    if (document.documentElement.classList.contains('is-ie') || navigator.userAgent.indexOf('Edge') != -1) {
+    if (document.documentElement.classList.contains('is-ie') || navigator.userAgent.indexOf('Trident') != -1 || navigator.userAgent.indexOf('Edge') != -1) {
       string += 'url(' + this.options.cursor.cur + '), auto';
     } else {
       string += 'url(' + this.options.cursor.png + ') ' + this.options.cursor.x + ' ' + this.options.cursor.y + ', default';

@@ -26,13 +26,41 @@
 
     <h1 class="title-main">ScratchCard</h1>
 
+    <p class="text-intro">
+        ScratchCard is a library javascript to generate scratch card (HTML5, canvas) in modern browsers with touch events support.
+    </p>
+
     <div class="scratch_container">
         <div class="scratch_viewport">
             <!-- result picture -->
             <canvas id="js-scratch-canvas"></canvas>
         </div>
     </div>
-    
+
+    <div class="max-width code">
+        <pre>
+            <code>
+                var scratch = new Scratch({
+                    canvasId: 'js-scratch-canvas',
+                    imageBackground: './images/loose.jpg',
+                    pictureOver: './images/foreground.jpg',
+                    cursor: {
+                        png: './images/piece.png',
+                        cur: './images/piece.cur',
+                        x: '20',
+                        y: '17'
+                    },
+                    radius: 20,
+                    nPoints: 100,
+                    percent: 50,
+                    callback: function () {
+                        alert('I am Callback.');
+                    },
+                    pointSize: { x: 3, y: 3}
+                });
+            </code>
+        </pre>
+    </div>
 
     <script type="text/javascript">
 
@@ -50,10 +78,11 @@
             nPoints: 100,
             percent: 50,
             callback: function () {
-                alert('I am Callback and i will do all you want :)');
+                alert('I am Callback.');
             },
             pointSize: { x: 3, y: 3}
         });
+
     </script>
 
 <!-- No javascript -->
