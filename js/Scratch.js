@@ -86,6 +86,7 @@ var Scratch = (function () {
 
 		window.addEventListener('resize', function() {
 			_this.update();
+			// Resize the canvas
 		});
 
 		window.addEventListener('scroll', function() {
@@ -118,14 +119,13 @@ var Scratch = (function () {
 
 	};
 
-	// Faire le cuseur ... :)
 	Scratch.prototype.setCursor = function() {
 		var string = '';
 
     if (document.documentElement.classList.contains('is-ie') || navigator.userAgent.indexOf('Trident') != -1 || navigator.userAgent.indexOf('Edge') != -1) {
       string += 'url(' + this.options.cursor.cur + '), auto';
     } else {
-      string += 'url(' + this.options.cursor.png + ') ' + this.options.cursor.x + ' ' + this.options.cursor.y + ', default';
+      string += 'url(' + this.options.cursor.png + ') ' + this.options.cursor.x + ' ' + this.options.cursor.y + ', pointer';
     }
 
 		this.canvas.setAttribute('style', 'cursor:' + string + ';');
@@ -134,6 +134,13 @@ var Scratch = (function () {
 	// Update positions etc
 	Scratch.prototype.update = function() {
 		this.zone = this.canvas.getBoundingClientRect();
+	};
+
+	Scratch.prototype.fluidify = function () {
+		var imgData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+		this.ctx.putImageData(imgData, 0, 0);
 	};
 
 	Scratch.prototype.setBackground = function() {

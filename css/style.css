@@ -2,12 +2,15 @@ body {
 	height: 2000px;
 	padding: 0;
 	margin: 0;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .title-main {
 	font-family: 'Lobster', cursive;
+	font-size: 40px;
 	text-align: center;
 	margin-bottom: 50px;
+	color: #553399;
 }
 
 .text-intro	{
@@ -24,7 +27,8 @@ body {
 }
 
 .code {
-	background-color: #CCC;
+	background-color: #e5e5e5;
+	border-radius: 10px;
 }
 
 /* Scratch */
@@ -51,5 +55,8 @@ body {
 }
 
 .scratch_container canvas {
+	position: relative;
+	width: 100%;
+	height: auto;
 	z-index: 1;
 }
