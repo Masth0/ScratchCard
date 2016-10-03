@@ -1,7 +1,7 @@
 #Work in progress...
 
 # ScratchCard
-ScratchCard is a library javascript to generate scratch card
+ScratchCard is a library javascript to generate scratch card (HTML5, canvas)
 in modern browsers with touch events support.
 
 ## Options
@@ -16,10 +16,10 @@ in modern browsers with touch events support.
 - **percent :** When clear the canvas after 'mouseup' event
 - **callback :** Function executed after canvas clearing
 - **cursor :** {  
-        **png :** // Path to the .png for modern browsers  
-        **x :** // Move position x  
-        **y :** // Move position y  
-        **cur :** // Path to the .cur for internet explorer  
+	        **png :** // Path to the .png for modern browsers  
+	        **x :** // Move position x  
+	        **y :** // Move position y  
+	        **cur :** // Path to the .cur for internet explorer  
     }
 
 ## Custom cusor for IE
