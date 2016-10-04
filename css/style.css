@@ -40,8 +40,8 @@ body {
 
 .scratch_viewport {
 	position: relative;
-	width: 250px;
-	height: 250px;
+	max-width: 250px;
+	max-height: 250px;
 	margin: 0 auto;
 	z-index: 0;
 }
@@ -50,6 +50,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
 	display: block;
 	z-index: -1;
 }
