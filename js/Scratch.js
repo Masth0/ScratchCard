@@ -87,6 +87,7 @@ var Scratch = (function () {
 		window.addEventListener('resize', function() {
 			_this.update();
 			// Resize the canvas
+			_this.redraw();
 		});
 
 		window.addEventListener('scroll', function() {
@@ -136,11 +137,15 @@ var Scratch = (function () {
 		this.zone = this.canvas.getBoundingClientRect();
 	};
 
-	Scratch.prototype.fluidify = function () {
-		var imgData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-		this.ctx.putImageData(imgData, 0, 0);
+	Scratch.prototype.redraw = function () {
+		var oldWidth = this.options.sceneWidth;
+		var newWidth = this.zone.width;
+		if(newWidth <= oldWidth) {
+			this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
+			this.canvas.width = this.zone.width;
+			this.canvas.height = this.zone.height;
+			this.ctx.drawImage(this.image, 0, 0, this.zone.width, this.zone.height);
+		}
 	};
 
 	Scratch.prototype.setBackground = function() {
