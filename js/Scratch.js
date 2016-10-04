@@ -140,7 +140,7 @@ var Scratch = (function () {
 	Scratch.prototype.redraw = function () {
 		var oldWidth = this.options.sceneWidth;
 		var newWidth = this.zone.width;
-		if(newWidth <= oldWidth) {
+		if(newWidth < oldWidth) {
 			this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
 			this.canvas.width = this.zone.width;
 			this.canvas.height = this.zone.height;
