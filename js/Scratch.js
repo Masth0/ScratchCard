@@ -107,14 +107,6 @@ var Scratch = (function () {
         this.removeEventListener('mouseup', _func);
       });
 		});
-		// this.canvas.addEventListener('mouseup', function _func(e) {
-		//  _this.canvas.removeEventListener('mousemove', scratchMove);
-		//  var clear = _this.clear();
-     //  if (clear) {
-     //    _this.callback(_this.options.callback);
-     //    _this.canvas.removeEventListener('mouseup', _func);
-     //  }
-		// });
 
 		this.canvas.addEventListener('touchstart', function(e) {
 		 	_this.canvas.addEventListener('touchmove', scratchMove);
@@ -124,13 +116,6 @@ var Scratch = (function () {
         this.removeEventListener('touchend', _func);
       });
 		});
-		// this.canvas.addEventListener('touchend', function(e) {
-		//  _this.canvas.removeEventListener('touchmove', scratchMove);
-		//  var clear = _this.clear();
-		//   if (clear) {
-     //    _this.callback(_this.options.callback);
-     //  }
-		// });
 
 	};
 
