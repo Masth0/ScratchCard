@@ -82,6 +82,10 @@ var Scratch = (function () {
 		var scratchMove = function(e) {
 			e.preventDefault();
 			_this.scratch(e);
+      var clear = _this.clear();
+      if (clear) {
+        _this.callback(_this.options.callback);
+      }
 		};
 
 		window.addEventListener('resize', function() {
@@ -97,26 +101,36 @@ var Scratch = (function () {
 		// Mouse & Touch events
 		this.canvas.addEventListener('mousedown', function(e) {
 		 	_this.canvas.addEventListener('mousemove', scratchMove);
+
+      document.body.addEventListener('mouseup', function _func() {
+        _this.canvas.removeEventListener('mousemove', scratchMove);
+        this.removeEventListener('mouseup', _func);
+      });
 		});
-		this.canvas.addEventListener('mouseup', function _func(e) {
-		 _this.canvas.removeEventListener('mousemove', scratchMove);
-		 var clear = _this.clear();
-      if (clear) {
-        _this.callback(_this.options.callback);
-        _this.canvas.removeEventListener('mouseup', _func);
-      }
-		});
+		// this.canvas.addEventListener('mouseup', function _func(e) {
+		//  _this.canvas.removeEventListener('mousemove', scratchMove);
+		//  var clear = _this.clear();
+     //  if (clear) {
+     //    _this.callback(_this.options.callback);
+     //    _this.canvas.removeEventListener('mouseup', _func);
+     //  }
+		// });
 
 		this.canvas.addEventListener('touchstart', function(e) {
 		 	_this.canvas.addEventListener('touchmove', scratchMove);
+
+      document.body.addEventListener('touchend', function _func() {
+        _this.canvas.removeEventListener('touchmove', scratchMove);
+        this.removeEventListener('touchend', _func);
+      });
 		});
-		this.canvas.addEventListener('touchend', function(e) {
-		 _this.canvas.removeEventListener('touchmove', scratchMove);
-		 var clear = _this.clear();
-		  if (clear) {
-        _this.callback(_this.options.callback);
-      }
-		});
+		// this.canvas.addEventListener('touchend', function(e) {
+		//  _this.canvas.removeEventListener('touchmove', scratchMove);
+		//  var clear = _this.clear();
+		//   if (clear) {
+     //    _this.callback(_this.options.callback);
+     //  }
+		// });
 
 	};
 
