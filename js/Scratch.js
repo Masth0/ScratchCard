@@ -84,6 +84,7 @@ var Scratch = (function () {
 			_this.scratch(e);
       var clear = _this.clear();
       if (clear) {
+        _this.canvas.style.pointerEvents = 'none';
         _this.callback(_this.options.callback);
       }
 		};
