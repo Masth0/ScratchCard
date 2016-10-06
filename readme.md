@@ -12,7 +12,10 @@ in modern browsers with touch events support. Here the demo page: [https://masth
 - **sceneHeight :** Canvas height
 - **radius :** Radius of clear zone 
 - **nPoints :** Number of points generate inside the clear zone
-- **pointSize :** { **x :** Number, **y :** Number } 
+- **pointSize :** {  
+	**x :** Number,  
+	**y :** Number  
+	} 
 - **percent :** When clear the canvas after 'mouseup' event
 - **callback :** Function executed after canvas clearing
 - **cursor :** {  
