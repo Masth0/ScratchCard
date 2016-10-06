@@ -30,13 +30,13 @@ in modern browsers with touch events support. Here the demo page: [https://masth
 ```
 var scratch = new Scratch({
 	canvasId: 'js-scratch-canvas',
-	imageBackground: './images/loose.jpg',
-	pictureOver: './images/foreground.jpg',
+	imageBackground: '/path/to/image',
+	pictureOver: '/path/to/image',
 	sceneWidth: 250,
 	sceneHeight: 250,
 	cursor: {
-		png: './images/piece.png',
-		cur: './images/piece.cur',
+		png: '/path/to/cursor.png',
+		cur: '/path/to/cursor.cur',
 		x: '20',
 		y: '17'
 	},
