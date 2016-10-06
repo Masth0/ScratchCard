@@ -24,3 +24,28 @@ in modern browsers with touch events support. Here the demo page: [https://masth
 	        **y :** // Move position y  
 	        **cur :** // Path to the .cur for internet explorer  
     }
+    
+## Jvascript init
+
+```
+var scratch = new Scratch({
+	canvasId: 'js-scratch-canvas',
+	imageBackground: './images/loose.jpg',
+	pictureOver: './images/foreground.jpg',
+	sceneWidth: 250,
+	sceneHeight: 250,
+	cursor: {
+		png: './images/piece.png',
+		cur: './images/piece.cur',
+		x: '20',
+		y: '17'
+	},
+	radius: 20,
+	nPoints: 100,
+	percent: 50,
+	callback: function () {
+		alert('I am Callback.');
+	},
+	pointSize: { x: 3, y: 3}
+});
+```
