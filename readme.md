@@ -6,10 +6,10 @@ in modern browsers with touch events support. Here the demo page: [**DEMO**] (ht
 
 ## Options
 - **canvasId :** Id string of canvas
+- **canvasWidth :** Canvas width
+- **canvasHeight :** Canvas height
 - **imageBackground :** Path to background image
 - **pictureOver :** Path to foreground image
-- **sceneWidth :** Canvas width
-- **sceneHeight :** Canvas height
 - **radius :** Radius of clear zone 
 - **nPoints :** Number of points generate inside the clear zone
 - **pointSize :** {  
