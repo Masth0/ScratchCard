@@ -25,7 +25,7 @@ in modern browsers with touch events support. Here the demo page: [**DEMO**] (ht
 	        **cur :** // Path to the .cur for internet explorer  
     }
     
-## Jvascript init
+## Javascript init
 
 ```
 var scratch = new Scratch({
