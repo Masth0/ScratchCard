@@ -32,8 +32,8 @@ var scratch = new Scratch({
 	canvasId: 'js-scratch-canvas',
 	imageBackground: '/path/to/image',
 	pictureOver: '/path/to/image',
-	sceneWidth: 250,
-	sceneHeight: 250,
+	canvasWidth: 250,
+	canvasHeight: 250,
 	cursor: {
 		png: '/path/to/cursor.png',
 		cur: '/path/to/cursor.cur',

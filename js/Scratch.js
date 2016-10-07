@@ -46,8 +46,8 @@ var Scratch = (function () {
       imageBackground: '', // Path [src]
       pictureOver: '', // Path [src]
 			cursor: this.cursor, // Custom pointer
-      sceneWidth: 250, // Canvas width
-      sceneHeight: 250, // Canvas height
+      canvasWidth: 250, // Canvas width
+      canvasHeight: 250, // Canvas height
       radius: 40, // Radius of scratch zone
       nPoints: 10, // n points for clear canvas
 			pointSize: this.pointSize,
@@ -67,8 +67,8 @@ var Scratch = (function () {
 		var _this = this; // Save the "this" :)
 		this.canvas = document.getElementById(this.options.canvasId);
 		this.ctx = this.canvas.getContext('2d');
-		this.canvas.width = this.options.sceneWidth;
-		this.canvas.height = this.options.sceneHeight;
+		this.canvas.width = this.options.canvasWidth;
+		this.canvas.height = this.options.canvasHeight;
 		this.image = new Image();
 		this.image.src = this.options.pictureOver;
 		this.percent = 0;
@@ -82,8 +82,9 @@ var Scratch = (function () {
 		var scratchMove = function(e) {
 			e.preventDefault();
 			_this.scratch(e);
-      var clear = _this.clear();
-      if (clear) {
+      var readyToClear = _this.readyToClear();
+      if (readyToClear) {
+      	_this.clear();
         _this.canvas.style.pointerEvents = 'none';
         _this.callback(_this.options.callback);
       }
@@ -138,7 +139,7 @@ var Scratch = (function () {
 	};
 
 	Scratch.prototype.redraw = function () {
-		var oldWidth = this.options.sceneWidth;
+		var oldWidth = this.options.canvasWidth;
 		var newWidth = this.zone.width;
 		if(newWidth < oldWidth) {
 			this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
@@ -210,6 +211,7 @@ var Scratch = (function () {
 			var points = this.clearPoint(x, y);
 			this.ctx.clearRect(points.x, points.y, this.options.pointSize.x, this.options.pointSize.y);
 		}
+		// update percent
 		this.percent = this.getPercent();
 	};
 
@@ -234,10 +236,11 @@ var Scratch = (function () {
 	};
 
 	Scratch.prototype.clear = function() {
-		if (this.percent >= this.options.percent) {
-			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		  return true;
-		}
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	};
+
+	Scratch.prototype.readyToClear = function() {
+		return (this.percent >= this.options.percent);
 	};
 
 	Scratch.prototype.callback = function(callback) {

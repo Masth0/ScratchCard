@@ -41,30 +41,32 @@
         </div>
 
         <!--&lt;!&ndash; Show code js init ScratchCard &ndash;&gt;-->
-        <!--<div class="max-width code">-->
-            <!--<pre>-->
-                <!--<code>-->
-                    <!--var scratch = new Scratch({-->
-                        <!--canvasId: 'js-scratch-canvas',-->
-                        <!--imageBackground: './images/loose.jpg',-->
-                        <!--pictureOver: './images/foreground.jpg',-->
-                        <!--cursor: {-->
-                            <!--png: './images/piece.png',-->
-                            <!--cur: './images/piece.cur',-->
-                            <!--x: '17',-->
-                            <!--y: '20'-->
-                        <!--},-->
-                        <!--radius: 20,-->
-                        <!--nPoints: 100,-->
-                        <!--percent: 50,-->
-                        <!--callback: function () {-->
-                            <!--alert('I am Callback.');-->
-                        <!--},-->
-                        <!--pointSize: { x: 3, y: 3}-->
-                    <!--});-->
-                <!--</code>-->
-            <!--</pre>-->
-        <!--</div>-->
+        <div class="max-width code">
+            <pre>
+                <code>
+                    var scratch = new Scratch({
+                        canvasId: 'js-scratch-canvas',
+                        canvasWidth: 250,
+                        canvasHeight: 250,
+                        imageBackground: './images/loose.jpg',
+                        pictureOver: './images/foreground.jpg',
+                        cursor: {
+                            png: './images/piece.png',
+                            cur: './images/piece.cur',
+                            x: '17',
+                            y: '20'
+                        },
+                        radius: 20,
+                        nPoints: 100,
+                        percent: 50,
+                        callback: function () {
+                            alert('I am Callback.');
+                        },
+                        pointSize: { x: 3, y: 3}
+                    });
+                </code>
+            </pre>
+        </div>
     </div>
 
     <script type="text/javascript">
