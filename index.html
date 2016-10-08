@@ -33,6 +33,7 @@
 
     <div class="max-width">
         <p>In this exemple if you scratch 50% of the canvas the callback is executed.</p>
+        <br>
         <div class="scratch_container">
             <div class="scratch_viewport">
                 <!-- result picture -->
@@ -40,31 +41,89 @@
             </div>
         </div>
 
-        <!--&lt;!&ndash; Show code js init ScratchCard &ndash;&gt;-->
+        <br><br>
+
+        <!-- Show code js init ScratchCard -->
+        <p class="title">Javascript init</p>
         <div class="max-width code">
             <pre>
                 <code>
-                    var scratch = new Scratch({
-                        canvasId: 'js-scratch-canvas',
-                        canvasWidth: 250,
-                        canvasHeight: 250,
-                        imageBackground: './images/loose.jpg',
-                        pictureOver: './images/foreground.jpg',
-                        cursor: {
-                            png: './images/piece.png',
-                            cur: './images/piece.cur',
-                            x: '17',
-                            y: '20'
-                        },
-                        radius: 20,
-                        nPoints: 100,
-                        percent: 50,
-                        callback: function () {
-                            alert('I am Callback.');
-                        },
-                        pointSize: { x: 3, y: 3}
-                    });
+    var scratch = new Scratch({
+        canvasId: 'js-scratch-canvas',
+        canvasWidth: 250,
+        canvasHeight: 250,
+        imageBackground: './images/loose.jpg',
+        pictureOver: './images/foreground.jpg',
+        cursor: {
+            png: './images/piece.png',
+            cur: './images/piece.cur',
+            x: '17',
+            y: '20'
+        },
+        radius: 20,
+        nPoints: 100,
+        percent: 50,
+        callback: function () {
+            alert('I am Callback.');
+        },
+        pointSize: { x: 3, y: 3}
+    });
                 </code>
+            </pre>
+        </div>
+
+        <br><br>
+
+        <p class="title">Html layout</p>
+        <div class="max-width code">
+            <pre>
+                <xmp>
+    <div class="scratch_container">
+        <div class="scratch_viewport">
+            <!-- result picture -->
+            <canvas id="js-scratch-canvas"></canvas>
+        </div>
+    </div>
+                </xmp>
+            </pre>
+        </div>
+
+        <br><br>
+
+        <p class="title">CSS for this exemple</p>
+        <div class="max-width code">
+            <pre>
+                <xmp>
+    .scratch_container {
+        position: relative;
+        margin: 0 auto;
+        max-width: 1024px;
+    }
+
+    .scratch_viewport {
+        position: relative;
+        max-width: 250px;
+        max-height: 250px;
+        margin: 0 auto;
+        z-index: 0;
+    }
+
+    .scratch_picture-under {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: block;
+        z-index: -1;
+    }
+
+    .scratch_container canvas {
+        position: relative;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+    }
+                </xmp>
             </pre>
         </div>
     </div>
