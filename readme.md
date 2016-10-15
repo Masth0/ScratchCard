@@ -1,5 +1,3 @@
-#Work in progress...
-
 # ScratchCard
 ScratchCard is a library javascript to generate scratch card (HTML5, canvas)
 in modern browsers with touch events support. Here the demo page: [**DEMO**] (https://masth0.github.io/ScratchCard/)
