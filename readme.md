@@ -49,3 +49,5 @@ var scratch = new Scratch({
 	pointSize: { x: 3, y: 3}
 });
 ```
+
+[MIT License](LICENSE.md). © Masth0 *(Thomas Wallerich)*

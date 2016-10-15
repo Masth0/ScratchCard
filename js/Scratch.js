@@ -1,3 +1,12 @@
+/*@license
+ * ScratchCard
+ *
+ * Copyright Masth0
+ * Released under the MIT license.
+ * https://masth0.github.io/ScratchCard/
+ *
+ */
+
 var Scratch = (function () {
 
 	/**
