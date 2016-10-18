@@ -48,4 +48,4 @@ var scratch = new Scratch({
 });
 ```
 
-[MIT License](LICENSE.md). © Masth0 *(Thomas Wallerich)*
+[MIT License](LICENSE.md). © Masth0
