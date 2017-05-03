@@ -120,7 +120,6 @@ var Scratch = (function () {
 		});
 
 		this.canvas.addEventListener('touchstart', function(e) {
-			e.preventdefault();
 		 	_this.canvas.addEventListener('touchmove', scratchMove);
 
       document.body.addEventListener('touchend', function _func() {
