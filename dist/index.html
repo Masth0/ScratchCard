@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ScratchCard 2</title>
+
+    <link rel="stylesheet" href="./build/css/style.css">
+</head>
+<body>
+
+
+    <div id="js--scratchcard--container">
+        <!-- <div id="js-debug-cursor"></div> -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="./build/js/scratchcard.js"></script>
+    <script type="text/javascript">
+        var test = new ScratchCard.default('#js--scratchcard--container', {
+            scratchType: 'BRUSH',
+            imageForwardSrc: './images/scratchcard.svg',
+            imageBackgroundSrc: './images/scratchcard-background.svg',
+            clearZoneRadius: 50,
+            nPoints: 100,
+            pointSize: [2, 2],
+            callback: function() {
+                alert('done.')
+            }
+        });
+        console.log(test)
+    </script>
+    
+</body>
+</html>
