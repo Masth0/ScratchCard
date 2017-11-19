@@ -1,6 +1,9 @@
 import {SC_CONFIG, ScratchType} from './ScratchCardConfig';
 import {randomPoint, loadImage, throttle, dispatchCustomEvent} from './utils';
 
+/**
+ * @enum ScratchCardEvent
+ */
 enum ScratchEvent {
   ScratchStart,
   Scratch,
@@ -9,6 +12,7 @@ enum ScratchEvent {
 
 export default class ScratchCard {
   readonly config: SC_CONFIG;
+  private defaults: SC_CONFIG;
   public percent: number; 
   private ctx: CanvasRenderingContext2D;
   private container: HTMLElement;
@@ -18,14 +22,29 @@ export default class ScratchCard {
   private position: number[];
   public scratchType: ScratchType;
   public readyToClear: Boolean;
+  public brush: HTMLImageElement;
   
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
-    this.config = Object.assign({}, config);
+    const defaults = {
+      scratchType: 'SPRAY',
+      container: HTMLElement,
+      nPoints: 100,
+      pointSize: [10, 10],
+        callback: function() {
+          alert('done.')
+      },
+      brushSrc: '',
+      imageForwardSrc: './images/scratchcard.png',
+      imageBackgroundSrc: './images/scratchcard-background.svg',
+      clearZoneRadius: 0,
+    };
+    this.config = Object.assign(defaults, config);
     this.scratchType = this.config.scratchType;
     this.container = <HTMLElement> document.querySelector(selector);
     this.position = [0, 0]; // init position
     this.readyToClear = false;
+    this.brush = this.generateBrush();
     // Add canvas in container
     this.init();
     
@@ -62,7 +81,6 @@ export default class ScratchCard {
     this.generateCanvas();
     this.ctx = this.canvas.getContext('2d');
     this.zone = this.canvas.getBoundingClientRect();
-    console.log(this.zone);
 
     loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
       this.ctx.drawImage(img, 0, 0);
@@ -76,6 +94,7 @@ export default class ScratchCard {
   private generateCanvas (): void {
     this.canvas = document.createElement('canvas');
     this.canvas.classList.add('sc__canvas');
+  
     // Add canvas into container
     this.container.appendChild(this.canvas);
     this.canvas.width = this.container.clientWidth;
@@ -126,16 +145,42 @@ export default class ScratchCard {
     let x = this.position[0];
     let y = this.position[1];
     let i = 0;
-    let len = this.config.nPoints;
+    
+    console.log(x, y);
+    
+    // let len = this.config.nPoints;
+    // for (i; i < len; i++) {
+    //   let points = this.clearPoint(x, y);
+    //   this.ctx.clearRect(points[0], points[1], this.config.pointSize[0], this.config.pointSize[1]);
+    // }
 
-    for (i; i < len; i++) {
-      let points = this.clearPoint(x, y);
-      this.ctx.clearRect(points[0], points[1], this.config.pointSize[0], this.config.pointSize[1]);
-    }
+    this.ctx.globalCompositeOperation = 'destination-out';
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.arc(x + this.config.clearZoneRadius, y + this.config.clearZoneRadius, this.config.clearZoneRadius, 0, Math.PI * 2, true);
+    this.ctx.fillStyle = '#000000';
+    this.ctx.fill();
+    this.ctx.closePath();
+    this.ctx.restore();
+    
+    
+    // this.ctx.globalCompositeOperation = 'destination-out';
+    // let angle = Math.atan2(y, x);
+    // this.ctx.save();
+    // this.ctx.translate(x, y);
+    // this.ctx.rotate(angle);
+    // this.ctx.drawImage(this.brush, -(this.brush.width / 2), -(this.brush.height / 2));
+    // this.ctx.restore();
   }
 
-  brush (): void {
-
+  generateBrush (): HTMLImageElement {
+    if (this.config.brushSrc.length !== 0) {
+      let brush = new Image();
+      brush.src = './images/brush.png';
+      return brush;
+    } else {
+      return null;
+    }
   }
 
   getPercent (): number {

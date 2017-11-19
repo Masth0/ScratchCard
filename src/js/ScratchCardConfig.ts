@@ -12,6 +12,7 @@ export interface SC_CONFIG {
   nPoints: number,
   pointSize: number[],
   callback ?: () => void,
+  brushSrc: string,
   cursor: {
     cur: string,
     png: string,
