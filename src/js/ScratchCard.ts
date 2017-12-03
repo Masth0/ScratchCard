@@ -1,5 +1,6 @@
 import {SC_CONFIG, ScratchType} from './ScratchCardConfig';
 import {randomPoint, loadImage, throttle, dispatchCustomEvent} from './utils';
+import Brush from './Brush';
 
 /**
  * @enum ScratchCardEvent
@@ -22,7 +23,8 @@ export default class ScratchCard {
   private position: number[];
   public scratchType: ScratchType;
   public readyToClear: Boolean;
-  public brush: HTMLImageElement;
+  public brush: Brush;
+  private brushImage: HTMLImageElement;
   
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
@@ -44,7 +46,6 @@ export default class ScratchCard {
     this.container = <HTMLElement> document.querySelector(selector);
     this.position = [0, 0]; // init position
     this.readyToClear = false;
-    this.brush = this.generateBrush();
     // Add canvas in container
     this.init();
     
@@ -53,6 +54,7 @@ export default class ScratchCard {
 
     let scratching = throttle((event: Event) => {
       self.position = self.mousePosition(event);
+      self.brush.updateMousePosition(self.position[0], self.position[1]);
       self.scratch();
       // calculate the percent of area scratched.
       self.percent = self.getPercent();
@@ -68,7 +70,6 @@ export default class ScratchCard {
 
     this.canvas.addEventListener('mousedown', function (event) {
       self.canvas.addEventListener('mousemove', scratching);
-
      document.body.addEventListener('mouseup', function _func () {
        self.canvas.removeEventListener('mousemove', scratching);
        this.removeEventListener('mouseup', _func);
@@ -81,6 +82,9 @@ export default class ScratchCard {
     this.generateCanvas();
     this.ctx = this.canvas.getContext('2d');
     this.zone = this.canvas.getBoundingClientRect();
+    this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
+
+    // TODO: Here choose the type of brush ['BRUSH', 'SPRAY', 'CIRCLE'].
 
     loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
       this.ctx.drawImage(img, 0, 0);
@@ -112,75 +116,33 @@ export default class ScratchCard {
     });
   };
 
-  mousePosition (event: any): number[] {
-		let posX: number, posY: number;
-		switch (event.type) {
-			case 'touchmove':
-				posX = event.touches[0].clientX - (this.config.clearZoneRadius / 2) - window.pageXOffset - this.zone.left;
-				posY = event.touches[0].clientY - (this.config.clearZoneRadius / 2) - window.pageYOffset - this.zone.top;
+  mousePosition(event: any): number[] {
+    let posX: number;
+    let posY: number;
+
+    switch (event.type) {
+      case 'touchmove':
+        posX = event.touches[0].clientX - (this.config.clearZoneRadius / 2) - window.pageXOffset - this.zone.left;
+        posY = event.touches[0].clientY - (this.config.clearZoneRadius / 2) - window.pageYOffset - this.zone.top;
+        break;
       case 'mousemove':
-				posX = event.clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
-				posY = event.clientY - this.config.clearZoneRadius - window.pageYOffset - this.zone.top;
-				break;
-		}
+        posX = event.clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
+        posY = event.clientY - this.config.clearZoneRadius - window.pageYOffset - this.zone.top;
+        break;
+    }
 
-		return [posX, posY];
-  }
-
-  clearPoint (posX: number, posY: number): number[] {
-    let radius: number = this.config.clearZoneRadius;
-    let x: number = Math.random() * 2 * radius - radius;
-    let ylim: number = Math.sqrt(radius * radius - x * x);
-    let y: number = Math.random() * 2 * ylim - ylim;
-    x += radius;
-    y += radius;
- 
-    x += posX;
-    y += posY;
- 
-    return [x, y];
+    return [posX, posY];
   }
 
   scratch (): void {
     let x = this.position[0];
     let y = this.position[1];
     let i = 0;
-    
-    console.log(x, y);
-    
-    // let len = this.config.nPoints;
-    // for (i; i < len; i++) {
-    //   let points = this.clearPoint(x, y);
-    //   this.ctx.clearRect(points[0], points[1], this.config.pointSize[0], this.config.pointSize[1]);
-    // }
 
     this.ctx.globalCompositeOperation = 'destination-out';
     this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.arc(x + this.config.clearZoneRadius, y + this.config.clearZoneRadius, this.config.clearZoneRadius, 0, Math.PI * 2, true);
-    this.ctx.fillStyle = '#000000';
-    this.ctx.fill();
-    this.ctx.closePath();
+    // TODO: Here call Brush method from brush type
     this.ctx.restore();
-    
-    
-    // this.ctx.globalCompositeOperation = 'destination-out';
-    // let angle = Math.atan2(y, x);
-    // this.ctx.save();
-    // this.ctx.translate(x, y);
-    // this.ctx.rotate(angle);
-    // this.ctx.drawImage(this.brush, -(this.brush.width / 2), -(this.brush.height / 2));
-    // this.ctx.restore();
-  }
-
-  generateBrush (): HTMLImageElement {
-    if (this.config.brushSrc.length !== 0) {
-      let brush = new Image();
-      brush.src = './images/brush.png';
-      return brush;
-    } else {
-      return null;
-    }
   }
 
   getPercent (): number {
