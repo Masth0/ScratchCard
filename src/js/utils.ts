@@ -26,22 +26,21 @@ export function loadImage(src: string) {
     let image = new Image();
     image.onload = () => {
       resolve(image);
-    }
+    };
     image.src = src;
     image.onerror = (event: Event) => {
       reject(event.type);
     }
   });
-  
 }
 
 export function throttle (callback: Function, delay: number) {
-  var last: number;
-  var timer: number;
+  let last: number;
+  let timer: number;
   return function () {
-      var context = this;
-      var now: number = +new Date();
-      var args = arguments;
+      let context = this;
+      let now: number = +new Date();
+      let args = arguments;
       if (last && now < last + delay) {
           // le délai n'est pas écoulé on reset le timer
           clearTimeout(timer);

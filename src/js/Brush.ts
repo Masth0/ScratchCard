@@ -1,3 +1,5 @@
+import {loadImage} from "./utils";
+
 export default class Brush {
   readonly ctx: CanvasRenderingContext2D;
   public mouseX: number;
@@ -41,6 +43,12 @@ export default class Brush {
     return [x, y];
   }
 
+  /**
+   * Create a set of points allocated in area,
+   * @param {number} area
+   * @param {number} dropsSize
+   * @param {number} dropsCount
+   */
   spray (area: number, dropsSize: number, dropsCount: number) {
     let i = 0;
     let dropsLength = dropsCount;
@@ -54,7 +62,7 @@ export default class Brush {
   static generateBrush (imgSrc: string): HTMLImageElement {
     if (imgSrc.length !== 0) {
       let brush = new Image();
-      brush.src = './images/brush.png';
+      brush.src = imgSrc;
       return brush;
     } else {
       return null;
@@ -62,12 +70,16 @@ export default class Brush {
   }
 
   brush (img: HTMLImageElement) {
+    if (img === null) {
+      let error = new Error( 'argument img is not a node IMG');
+      console.log(error.message);
+      return;
+    }
     let angle = Math.atan2(this.mouseY, this.mouseX);
     this.ctx.save();
     this.ctx.translate(this.mouseX, this.mouseY);
     this.ctx.rotate(angle);
     this.ctx.drawImage(img, -(img.width / 2), -(img.height / 2));
   }
-
 
 }

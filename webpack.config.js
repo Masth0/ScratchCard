@@ -19,7 +19,7 @@ const JS = {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
     path: __dirname + '/dist/build/js',
-    library: 'ScratchCard',
+    library: 'ScratchCard.default',
     libraryTarget: 'umd'
   },
   resolve: {

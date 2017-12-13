@@ -18,18 +18,19 @@
     <!-- Scripts -->
     <script src="./build/js/scratchcard.js"></script>
     <script type="text/javascript">
-        var test = new ScratchCard.default('#js--scratchcard--container', {
-            scratchType: 'BRUSH',
+        var test = new ScratchCard('#js--scratchcard--container', {
+            scratchType: SCRATCH_TYPE.SPRAY,
+            brushSrc: './images/brush.png',
             imageForwardSrc: './images/scratchcard.png',
             imageBackgroundSrc: './images/scratchcard-background.svg',
-            clearZoneRadius: 10,
+            clearZoneRadius: 50,
             nPoints: 100,
             pointSize: [2, 2],
             callback: function() {
                 alert('done.')
             }
         });
-        console.log(test)
+
     </script>
     
 </body>

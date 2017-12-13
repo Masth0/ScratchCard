@@ -1,10 +1,11 @@
-export enum ScratchType {
-  Spray = 'SPRAY',
-  Brush = 'BRUSH'
+export enum SCRATCH_TYPE {
+  BRUSH,
+  SPRAY,
+  CIRCLE
 }
 
 export interface SC_CONFIG {
-  scratchType: ScratchType,
+  scratchType: SCRATCH_TYPE,
   container: HTMLElement,
   imageForwardSrc: string,
   imageBackgroundSrc: string,

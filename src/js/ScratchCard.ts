@@ -1,17 +1,8 @@
-import {SC_CONFIG, ScratchType} from './ScratchCardConfig';
+import {SC_CONFIG, SCRATCH_TYPE} from './ScratchCardConfig';
 import {randomPoint, loadImage, throttle, dispatchCustomEvent} from './utils';
 import Brush from './Brush';
 
-/**
- * @enum ScratchCardEvent
- */
-enum ScratchEvent {
-  ScratchStart,
-  Scratch,
-  ScratchEnd
-}
-
-export default class ScratchCard {
+class ScratchCard {
   readonly config: SC_CONFIG;
   private defaults: SC_CONFIG;
   public percent: number; 
@@ -21,15 +12,15 @@ export default class ScratchCard {
   private zone: ClientRect;
   private canvas: HTMLCanvasElement;
   private position: number[];
-  public scratchType: ScratchType;
-  public readyToClear: Boolean;
-  public brush: Brush;
-  private brushImage: HTMLImageElement;
+  private scratchType: SCRATCH_TYPE;
+  private readyToClear: Boolean;
+  private brush: Brush;
+  private brushImage: any;
   
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
     const defaults = {
-      scratchType: 'SPRAY',
+      scratchType: SCRATCH_TYPE.SPRAY,
       container: HTMLElement,
       nPoints: 100,
       pointSize: [10, 10],
@@ -84,14 +75,18 @@ export default class ScratchCard {
     this.zone = this.canvas.getBoundingClientRect();
     this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
 
-    // TODO: Here choose the type of brush ['BRUSH', 'SPRAY', 'CIRCLE'].
+    // Init the brush if  necessary
+    if (this.config.scratchType === SCRATCH_TYPE.BRUSH) {
+      this.brushImage = Brush.generateBrush(this.config.brushSrc);
+    }
 
     loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
-      this.ctx.drawImage(img, 0, 0);
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
       this.setBackground();
     }, (event) => {
       // Stop all script here
       console.log(event);
+      return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
     });
   }
   
@@ -141,7 +136,19 @@ export default class ScratchCard {
 
     this.ctx.globalCompositeOperation = 'destination-out';
     this.ctx.save();
-    // TODO: Here call Brush method from brush type
+
+    switch (this.config.scratchType) {
+      case SCRATCH_TYPE.BRUSH:
+        this.brush.brush(this.brushImage);
+        break;
+      case SCRATCH_TYPE.CIRCLE:
+        this.brush.circle(this.config.clearZoneRadius);
+        break;
+      case SCRATCH_TYPE.SPRAY:
+        this.brush.spray(this.config.clearZoneRadius, 2,  100);
+        break;
+    }
+
     this.ctx.restore();
   }
 
@@ -173,3 +180,9 @@ export default class ScratchCard {
   }
 
 }
+
+// Expose in window directly
+(<any>window).ScratchCard = ScratchCard;
+(<any>window).SCRATCH_TYPE = SCRATCH_TYPE;
+
+export default ScratchCard;
