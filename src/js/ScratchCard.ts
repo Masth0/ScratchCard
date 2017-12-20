@@ -32,23 +32,37 @@ class ScratchCard {
       imageBackgroundSrc: './images/scratchcard-background.svg',
       clearZoneRadius: 0,
     };
+
     this.config = Object.assign(defaults, config);
     this.scratchType = this.config.scratchType;
     this.container = <HTMLElement> document.querySelector(selector);
     this.position = [0, 0]; // init position
     this.readyToClear = false;
-    // Add canvas in container
-    this.init();
-    
-    // debug
-    const cursorDebug = document.getElementById('js-debug-cursor');
+    this.percent = 0;
 
+    // Create and add the canvas
+    this.generateCanvas();
+
+    this.ctx = this.canvas.getContext('2d');
+    this.zone = this.canvas.getBoundingClientRect();
+
+    // Init the brush instance
+    this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
+
+    // Init the brush if  necessary
+    if (this.config.scratchType === SCRATCH_TYPE.BRUSH) {
+      this.brushImage = Brush.generateBrush(this.config.brushSrc);
+    }
+
+    /*---- Scratching method , call in throttle event ------------------------------------*/
     let scratching = throttle((event: Event) => {
+      self.dispatchEvent('scratch', 'move');
       self.position = self.mousePosition(event);
       self.brush.updateMousePosition(self.position[0], self.position[1]);
       self.scratch();
+
       // calculate the percent of area scratched.
-      self.percent = self.getPercent();
+      self.percent = self.updatePercent();
       
       if (self.percent >= 50) {
         self.clear();
@@ -59,34 +73,50 @@ class ScratchCard {
       }
     }, 16);
 
+    /*---- Events -----------------------------------------------------------------------*/
     this.canvas.addEventListener('mousedown', function (event) {
       self.canvas.addEventListener('mousemove', scratching);
-     document.body.addEventListener('mouseup', function _func () {
-       self.canvas.removeEventListener('mousemove', scratching);
-       this.removeEventListener('mouseup', _func);
-     });
-   });
+      document.body.addEventListener('mouseup', function _func () {
+        self.canvas.removeEventListener('mousemove', scratching);
+        this.removeEventListener('mouseup', _func);
+      });
+    });
 
+    // Update canvas positions when the window has been resized
+    window.addEventListener('resize', throttle(() => {
+      this.zone = this.canvas.getBoundingClientRect();
+    }, 100));
   }
 
-  init (): void {
-    this.generateCanvas();
-    this.ctx = this.canvas.getContext('2d');
-    this.zone = this.canvas.getBoundingClientRect();
-    this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
+  /**
+   * Get percent of scratchCard
+   * @returns {number}
+   */
+  getPercent () {
+    return this.percent;
+  }
 
-    // Init the brush if  necessary
-    if (this.config.scratchType === SCRATCH_TYPE.BRUSH) {
-      this.brushImage = Brush.generateBrush(this.config.brushSrc);
-    }
+  /**
+   * Distpach event
+   * @param {string} phase
+   * @param {string} type
+   */
+  dispatchEvent (phase: string, type: string) {
+    dispatchCustomEvent(this.canvas, `${phase}.${type}`, {});
+  }
 
-    loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
-      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
-      this.setBackground();
-    }, (event) => {
-      // Stop all script here
-      console.log(event);
-      return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
+  init (): Promise<any> {
+    return new Promise((resolve, reject) => {
+      loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
+        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+        this.setBackground();
+        // Resolve the promise init
+        resolve();
+      }, (event) => {
+        // Reject init
+        reject(event);
+        return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
+      });
     });
   }
   
@@ -105,13 +135,13 @@ class ScratchCard {
     loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {    
       image.src = img.src;
       this.container.insertBefore(image, this.canvas);
-    }, (event) => {
+    }, (error) => {
       // Stop all script here
-      console.log(event);
+      console.log(error.message);
     });
   };
 
-  mousePosition(event: any): number[] {
+  mousePosition (event: any): number[] {
     let posX: number;
     let posY: number;
 
@@ -137,6 +167,7 @@ class ScratchCard {
     this.ctx.globalCompositeOperation = 'destination-out';
     this.ctx.save();
 
+    // Choose the good method to 'paint'
     switch (this.config.scratchType) {
       case SCRATCH_TYPE.BRUSH:
         this.brush.brush(this.brushImage);
@@ -145,31 +176,34 @@ class ScratchCard {
         this.brush.circle(this.config.clearZoneRadius);
         break;
       case SCRATCH_TYPE.SPRAY:
-        this.brush.spray(this.config.clearZoneRadius, 2,  100);
+        this.brush.spray(this.config.clearZoneRadius, this.config.pointSize,  this.config.nPoints);
         break;
     }
 
     this.ctx.restore();
   }
 
-  getPercent (): number {
-    let percent;
-    let counter = 0; // number of pixels clear
+  /*
+  * Image data :
+  * Red: image.data[0]
+  * Green: image.data[1]
+  * Blue: image.data[2]
+  * Alpha: image.data[3]
+  * */
+  updatePercent (): number {
+    let counter = 0; // number of pixels cleared
     let imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
     let imageDataLength = imageData.data.length;
 
+    // loop data image drop every 4 items [r, g, b, a, ...]
     for(let i = 0; i < imageDataLength; i += 4) {
+      // Increment the counter only if the pixel in completely clear
       if (imageData.data[i] === 0 && imageData.data[i+1] === 0 && imageData.data[i+2] === 0 && imageData.data[i+3] === 0) {
         counter++;
       }
     }
 
-    if (counter >= 1) {
-      percent = (counter / (this.canvas.width * this.canvas.height)) * 100;
-    } else {
-      percent = 0;
-    }
-    return percent;
+    return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
   }
   
   /**
@@ -181,7 +215,7 @@ class ScratchCard {
 
 }
 
-// Expose in window directly
+// Expose directly in window, any ideas to do this better.
 (<any>window).ScratchCard = ScratchCard;
 (<any>window).SCRATCH_TYPE = SCRATCH_TYPE;
 

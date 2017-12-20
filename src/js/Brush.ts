@@ -1,5 +1,3 @@
-import {loadImage} from "./utils";
-
 export default class Brush {
   readonly ctx: CanvasRenderingContext2D;
   public mouseX: number;
@@ -55,10 +53,19 @@ export default class Brush {
 
     for (i; i < dropsLength; i++) {
       let points = this.clearPoint(area / 2);
-      this.ctx.clearRect(points[0], points[1], dropsSize, dropsSize);
+      this.ctx.beginPath();
+      this.ctx.arc(points[0] + (area / 2), points[1] + (area / 2), dropsSize / 2, 0, Math.PI * 2, false);
+      this.ctx.fillStyle = '#000000';
+      this.ctx.fill();
+      this.ctx.closePath();
     }
   }
 
+  /**
+   * Create brush image
+   * @param {string} imgSrc
+   * @returns {HTMLImageElement}
+   */
   static generateBrush (imgSrc: string): HTMLImageElement {
     if (imgSrc.length !== 0) {
       let brush = new Image();
@@ -69,6 +76,10 @@ export default class Brush {
     }
   }
 
+  /**
+   * Draw the brush image on canvas
+   * @param {HTMLImageElement} img
+   */
   brush (img: HTMLImageElement) {
     if (img === null) {
       let error = new Error( 'argument img is not a node IMG');

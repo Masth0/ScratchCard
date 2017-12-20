@@ -11,7 +11,7 @@ export interface SC_CONFIG {
   imageBackgroundSrc: string,
   clearZoneRadius: number,
   nPoints: number,
-  pointSize: number[],
+  pointSize: number,
   callback ?: () => void,
   brushSrc: string,
   cursor: {

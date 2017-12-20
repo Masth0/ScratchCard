@@ -22,15 +22,20 @@
             scratchType: SCRATCH_TYPE.SPRAY,
             brushSrc: './images/brush.png',
             imageForwardSrc: './images/scratchcard.png',
-            imageBackgroundSrc: './images/scratchcard-background.svg',
+            imageBackgroundSrc: './images/scratchcard-background.png',
             clearZoneRadius: 50,
-            nPoints: 100,
-            pointSize: [2, 2],
+            nPoints: 30,
+            pointSize: 4,
             callback: function() {
                 alert('done.')
             }
         });
-
+        test.init().then(() => {
+          test.canvas.addEventListener('scratch.move', () => {
+            var percent = test.getPercent();
+            console.log(percent);
+          })
+        });
     </script>
     
 </body>

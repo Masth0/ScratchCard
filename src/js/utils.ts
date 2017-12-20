@@ -8,17 +8,8 @@ export function randomPoint (min: number, max: number) {
   return parseInt(random.toFixed(0), 10);
 }
 
-export function dispatchCustomEvent (target: HTMLElement, type: string, detail: any) {
-  let customEvent = new CustomEvent(type, {
-    bubbles: true,
-    cancelable: true,
-    detail: detail
-  });
-  target.dispatchEvent(customEvent);
-}
-
 /**
- * 
+ * Make a promise to load image
  * @param src {String}
  */
 export function loadImage(src: string) {
@@ -29,7 +20,8 @@ export function loadImage(src: string) {
     };
     image.src = src;
     image.onerror = (event: Event) => {
-      reject(event.type);
+      const error = new Error(`Image ${src} is not loaded.`);
+      reject(error);
     }
   });
 }
@@ -53,4 +45,37 @@ export function throttle (callback: Function, delay: number) {
           callback.apply(context, args);
       }
   };
+}
+
+/*---- Events -----------------------------------------------------------------------*/
+// polyfill source: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+(function () {
+
+  if ( typeof (<any>window).CustomEvent === "function" ) return false;
+
+  function CustomEvent (event: any, params: any) {
+    params = params || { bubbles: false, cancelable: false, detail: undefined };
+    var evt = document.createEvent( 'CustomEvent' );
+    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+    return evt;
+  }
+
+  CustomEvent.prototype = (<any>window).Event.prototype;
+
+  (<any>window).CustomEvent = CustomEvent;
+})();
+
+/**
+ *
+ * @param {HTMLElement} target
+ * @param {string} type
+ * @param detail
+ */
+export function dispatchCustomEvent (target: HTMLCanvasElement, type: string, detail: any) {
+  let customEvent = new CustomEvent(type, {
+    bubbles: true,
+    cancelable: true,
+    detail: detail
+  });
+  target.dispatchEvent(customEvent);
 }
