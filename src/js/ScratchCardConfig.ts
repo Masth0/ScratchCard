@@ -6,7 +6,8 @@ export enum SCRATCH_TYPE {
 
 export interface SC_CONFIG {
   scratchType: SCRATCH_TYPE,
-  container: HTMLElement,
+  containerWidth: number,
+  containerHeight: number,
   imageForwardSrc: string,
   imageBackgroundSrc: string,
   clearZoneRadius: number,

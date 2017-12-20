@@ -8,7 +8,7 @@ class ScratchCard {
   public percent: number; 
   private ctx: CanvasRenderingContext2D;
   private container: HTMLElement;
-  private bgImage: HTMLImageElement;
+  private scratchImage: HTMLImageElement;
   private zone: ClientRect;
   private canvas: HTMLCanvasElement;
   private position: number[];
@@ -21,7 +21,8 @@ class ScratchCard {
     const self = this;
     const defaults = {
       scratchType: SCRATCH_TYPE.SPRAY,
-      container: HTMLElement,
+      containerWidth: 100,
+      containerHeight: 100,
       nPoints: 100,
       pointSize: [10, 10],
         callback: function() {
@@ -85,6 +86,7 @@ class ScratchCard {
     // Update canvas positions when the window has been resized
     window.addEventListener('resize', throttle(() => {
       this.zone = this.canvas.getBoundingClientRect();
+      this.redraw();
     }, 100));
   }
 
@@ -108,7 +110,8 @@ class ScratchCard {
   init (): Promise<any> {
     return new Promise((resolve, reject) => {
       loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
-        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+        this.scratchImage = img;
+        this.ctx.drawImage(this.scratchImage, 0, 0, this.canvas.width, this.canvas.height);
         this.setBackground();
         // Resolve the promise init
         resolve();
@@ -125,9 +128,10 @@ class ScratchCard {
     this.canvas.classList.add('sc__canvas');
   
     // Add canvas into container
+    this.canvas.width = this.config.containerWidth;
+    this.canvas.height = this.config.containerHeight;
     this.container.appendChild(this.canvas);
-    this.canvas.width = this.container.clientWidth;
-    this.canvas.height = this.container.clientHeight;
+    console.log(this.config);
   }
 
   private setBackground (): void {
@@ -204,6 +208,18 @@ class ScratchCard {
     }
 
     return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
+  }
+
+  // TODO: Improve this
+  redraw () {
+    let oldWidth = this.config.containerWidth;
+    let newWidth = this.zone.width;
+    if(newWidth < oldWidth) {
+      this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
+      this.canvas.width = this.zone.width;
+      this.canvas.height = this.zone.height;
+      this.ctx.drawImage(this.scratchImage, 0, 0, this.zone.width, this.zone.height);
+    }
   }
   
   /**

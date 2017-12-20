@@ -1,1 +1,72 @@
-*{padding:0;margin:0;border:none}#js--scratchcard--container{position:relative;margin:0 auto;width:300px;height:300px;border:1px solid #000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#js--scratchcard--container:before{content:"";display:block;background-image:url("/images/loader.gif");background-repeat:no-repeat;background-position:50%}#js--scratchcard--container:before,#js--scratchcard--container canvas{position:absolute;top:0;left:0;width:100%;height:100%}#js--scratchcard--container img{display:block;position:absolute;top:0;left:0;width:100%;height:auto;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#js-debug-cursor{position:absolute;top:0;left:0;background-color:#ff0;width:50px;height:50px;z-index:99;will-change:transform;-webkit-transition-duration:.3s;transition-duration:.3s}
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  height: auto;
+}
+
+#js--scratchcard--container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border: 1px solid black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#js--scratchcard--container:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/loader.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#js--scratchcard--container canvas {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#js--scratchcard--container img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#js-debug-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: yellow;
+  width: 50px;
+  height: 50px;
+  z-index: 99;
+  will-change: transform;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+}

@@ -11,15 +11,15 @@
 <body>
 
 
-    <div id="js--scratchcard--container">
-        <!-- <div id="js-debug-cursor"></div> -->
-    </div>
+    <div id="js--scratchcard--container"></div>
 
     <!-- Scripts -->
     <script src="./build/js/scratchcard.js"></script>
     <script type="text/javascript">
         var test = new ScratchCard('#js--scratchcard--container', {
             scratchType: SCRATCH_TYPE.SPRAY,
+            containerWidth: 500,
+            containerHeight: 500,
             brushSrc: './images/brush.png',
             imageForwardSrc: './images/scratchcard.png',
             imageBackgroundSrc: './images/scratchcard-background.png',
