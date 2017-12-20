@@ -83,6 +83,15 @@ class ScratchCard {
       });
     });
 
+    // Mobile events
+    this.canvas.addEventListener('touchstart', function (event) {
+      self.canvas.addEventListener('touchmove', scratching);
+      document.body.addEventListener('touchend', function _func () {
+        self.canvas.removeEventListener('touchmove', scratching);
+        this.removeEventListener('touchend', _func);
+      });
+    });
+
     // Update canvas positions when the window has been resized
     window.addEventListener('resize', throttle(() => {
       this.zone = this.canvas.getBoundingClientRect();
@@ -131,7 +140,6 @@ class ScratchCard {
     this.canvas.width = this.config.containerWidth;
     this.canvas.height = this.config.containerHeight;
     this.container.appendChild(this.canvas);
-    console.log(this.config);
   }
 
   private setBackground (): void {
@@ -151,8 +159,8 @@ class ScratchCard {
 
     switch (event.type) {
       case 'touchmove':
-        posX = event.touches[0].clientX - (this.config.clearZoneRadius / 2) - window.pageXOffset - this.zone.left;
-        posY = event.touches[0].clientY - (this.config.clearZoneRadius / 2) - window.pageYOffset - this.zone.top;
+        posX = event.touches[0].clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
+        posY = event.touches[0].clientY - this.config.clearZoneRadius - window.pageYOffset - this.zone.top;
         break;
       case 'mousemove':
         posX = event.clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
@@ -214,7 +222,7 @@ class ScratchCard {
   redraw () {
     let oldWidth = this.config.containerWidth;
     let newWidth = this.zone.width;
-    if(newWidth < oldWidth) {
+    if (newWidth < oldWidth) {
       this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
       this.canvas.width = this.zone.width;
       this.canvas.height = this.zone.height;
