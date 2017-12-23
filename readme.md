@@ -3,5 +3,4 @@ ScratchCard is a js lib to simulated a scratchcard in browser with html5 and can
 
 ## Install
 
-
 ## Getting started

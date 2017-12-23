@@ -13,7 +13,7 @@
     "typescript",
     "scratch card"
   ],
-  "author": "Masth0",
+  "author": "Masth0 <dev.mastho@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
