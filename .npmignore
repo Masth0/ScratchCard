@@ -2,6 +2,8 @@
 ._*
 .DS_Store
 .git
+.idea
+.vscode
 .hg
 .npmrc
 .lock-wscript
