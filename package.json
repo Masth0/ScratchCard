@@ -1,18 +1,17 @@
 {
-  "name": "scratchcard-2",
+  "name": "scratchcard",
   "version": "2.0.0",
   "description": "Create scratch card in browser.",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack",
-    "build": "webpack --optimize-minimize"
+    "build": "cross-env NODE_ENV=prod webpack --optimize-minimize"
   },
   "keywords": [
     "canvas",
     "javascript",
     "typescript",
-    "scratch",
-    "card"
+    "scratch card"
   ],
   "author": "Masth0",
   "license": "ISC",
