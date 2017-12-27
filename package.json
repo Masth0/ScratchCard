@@ -1,6 +1,6 @@
 {
   "name": "scratchcard-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Create scratch card in browser.",
   "main": "./build/scratchcard.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "scratch card"
   ],
   "author": "Masth0 <dev.mastho@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "browser-sync": "^2.18.13",
