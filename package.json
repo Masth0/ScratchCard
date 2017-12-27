@@ -35,5 +35,9 @@
   "browsers": [
     "last 2 versions",
     "ie > 9"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registery": "https://registry.npmjs.org/scratchcard-js"
+  }
 }
