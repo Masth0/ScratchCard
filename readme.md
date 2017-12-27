@@ -1,4 +1,7 @@
-# Scratchcard-js (WIP) ![alt text](https://travis-ci.org/Masth0/ScratchCard.svg?branch=v2)
+# Scratchcard-js (WIP) 
+![alt text](https://travis-ci.org/Masth0/ScratchCard.svg?branch=v2)
+![alt text](https://img.shields.io/npm/v/scratchcard-js.svg)
+
 ScratchCard is a js lib to simulated a scratchcard in browser with html5 and canvas.
 
 ## Install
