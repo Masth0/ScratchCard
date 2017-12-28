@@ -2,10 +2,10 @@
   "name": "scratchcard-js",
   "version": "1.0.4",
   "description": "Create scratch card in browser.",
-  "main": "./build/scratchcard.js",
+  "main": "./build/js/scratchcard.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack",
-    "build": "cross-env NODE_ENV=prod webpack --optimize-minimize"
+    "build": "cross-env NODE_ENV=prod webpack"
   },
   "keywords": [
     "canvas",
@@ -17,6 +17,10 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.21.0",
     "browser-sync-webpack-plugin": "^1.2.0",
     "clean-webpack-plugin": "^0.1.16",
@@ -30,6 +34,7 @@
     "style-loader": "^0.18.2",
     "ts-loader": "^2.3.7",
     "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.10.0"
   },
   "browsers": [
@@ -37,7 +42,6 @@
     "ie > 9"
   ],
   "publishConfig": {
-    "access": "public",
-    "registery": "https://registry.npmjs.org/scratchcard-js"
+    "access": "public"
   }
 }

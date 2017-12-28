@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Bs = require('browser-sync');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'dev';
@@ -13,12 +14,13 @@ const JS = {
   watch: isDev,
   devtool: isDev ? 'inline-source-map' : false,
   entry: {
-    scratchcard: './ScratchCard.ts'
+    scratchcard: './ScratchCard.ts',
+    '../../build/js/scratchcard.min': './ScratchCard.ts'
   },
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
-    path: __dirname + '/dist/build/js',
+    path: __dirname + '/dist/js',
     library: 'ScratchCard.default',
     libraryTarget: 'umd'
   },
@@ -29,7 +31,7 @@ const JS = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: ['babel-loader','ts-loader'],
         exclude: /node_modules/
       }
     ]
@@ -56,7 +58,7 @@ const SCSS = {
   },
   output: {
     filename: 'style.css',
-    path: __dirname + '/dist/build/css'
+    path: __dirname + '/dist/css'
   },
   module: {
     rules: [
@@ -88,12 +90,14 @@ const SCSS = {
 
 /*---- For production -----------------------------------------------------------------------*/
 if (!isDev) {
-  JS.plugins.push(new CleanWebpackPlugin(['dist/build/js'], { // remove ./dist/js
+  JS.output.filename = '[name].min.js';
+  JS.plugins.push(new CleanWebpackPlugin(['dist/js'], { // remove ./dist/js
     root: path.resolve('./'),
     verbose: true,
     dry: true,
   }));
-  SCSS.plugins.push(new CleanWebpackPlugin(['dist/build/css'], { // remove ./dist/css
+  JS.plugins.push(new UglifyJsPlugin());
+  SCSS.plugins.push(new CleanWebpackPlugin(['dist/css'], { // remove ./dist/css
     root: path.resolve('./'),
     verbose: true,
     dry: true,

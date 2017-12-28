@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ScratchCard 2</title>
+    <title>Scratchcard-js</title>
 
-    <link rel="stylesheet" href="./build/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
 
     <div id="js--scratchcard--container"></div>
 
     <!-- Scripts -->
-    <script src="./build/js/scratchcard.js"></script>
+    <script src="./../build/js/scratchcard.js"></script>
     <script type="text/javascript">
         var test = new ScratchCard('#js--scratchcard--container', {
             scratchType: SCRATCH_TYPE.SPRAY,
@@ -30,8 +29,8 @@
                 alert('done.')
             }
         });
-        test.init().then(() => {
-          test.canvas.addEventListener('scratch.move', () => {
+        test.init().then(function() {
+          test.canvas.addEventListener('scratch.move', function() {
             var percent = test.getPercent();
             console.log(percent);
           })

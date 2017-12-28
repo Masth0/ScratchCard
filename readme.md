@@ -11,7 +11,7 @@ npm install scratchcard-js
 ```
 or just clone this repo and pick out 
 ```
-git clone ...
+git clone https://github.com/Masth0/ScratchCard.git
 ```
 and pick in the folder **./build** the file **scratchard.min.js**
 
