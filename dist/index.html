@@ -13,13 +13,13 @@
     <div id="js--scratchcard--container"></div>
 
     <!-- Scripts -->
-    <script src="./../build/js/scratchcard.js"></script>
+    <script src="./js/scratchcard.js"></script>
     <script type="text/javascript">
         var test = new ScratchCard('#js--scratchcard--container', {
             scratchType: SCRATCH_TYPE.SPRAY,
             containerWidth: 300,
             containerHeight: 300,
-            brushSrc: './images/brush.png',
+            brushSrc: '',
             imageForwardSrc: './images/scratchcard.png',
             imageBackgroundSrc: './images/scratchcard-background.png',
             clearZoneRadius: 50,
@@ -32,8 +32,9 @@
         test.init().then(function() {
           test.canvas.addEventListener('scratch.move', function() {
             var percent = test.getPercent();
-            console.log(percent);
-          })
+          });
+        }).catch((error) => {
+          alert(error.message);
         });
     </script>
     

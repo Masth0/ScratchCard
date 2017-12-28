@@ -1,3 +1,5 @@
+import {loadImage} from "./utils";
+
 export default class Brush {
   readonly ctx: CanvasRenderingContext2D;
   public mouseX: number;

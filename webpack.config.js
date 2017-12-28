@@ -15,7 +15,7 @@ const JS = {
   devtool: isDev ? 'inline-source-map' : false,
   entry: {
     scratchcard: './ScratchCard.ts',
-    '../../build/js/scratchcard.min': './ScratchCard.ts'
+    '../../build/js/scratchcard': './ScratchCard.ts'
   },
   output: {
     filename: '[name].js',
