@@ -65,7 +65,7 @@ class ScratchCard {
       // calculate the percent of area scratched.
       self.percent = self.updatePercent();
       
-      if (self.percent >= 50) {
+      if (self.percent > 50) {
         self.clear();
         self.canvas.style.pointerEvents = 'none';
         if (self.config.callback !== undefined) {
@@ -218,7 +218,6 @@ class ScratchCard {
     return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
   }
 
-  // TODO: Improve this
   redraw () {
     let oldWidth = this.config.containerWidth;
     let newWidth = this.zone.width;

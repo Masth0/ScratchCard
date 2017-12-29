@@ -4,7 +4,7 @@
 
 ScratchCard is a js lib to simulated a scratchcard in browser with html5 and canvas.
 
-![version](./scratchcard-js.png)
+![version](scratchcard-js.png)
 
 ## Install
 You can install ScratchCard with npm:
@@ -26,7 +26,6 @@ let sc = new ScratchCard('#js--scratchcard--container', {
      scratchType: SCRATCH_TYPE.SPRAY,
      containerWidth: 300,
      containerHeight: 300,
-     brushSrc: './images/brush.png',
      imageForwardSrc: './images/scratchcard.png',
      imageBackgroundSrc: './images/scratchcard-background.png',
      clearZoneRadius: 50,

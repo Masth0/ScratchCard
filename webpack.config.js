@@ -20,7 +20,7 @@ const JS = {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
-    path: __dirname + '/dist/js',
+    path: __dirname + '/docs/js/lib',
     library: 'ScratchCard.default',
     libraryTarget: 'umd'
   },
@@ -42,7 +42,7 @@ const JS = {
       // ./public directory is being served 
       host: 'localhost',
       port: 3000,
-      server: { baseDir: ['dist'] },
+      server: { baseDir: ['docs'] },
       files: ['./src/js/**/*.ts', './src/scss/**/*.scss']
     })
   ]
@@ -58,7 +58,7 @@ const SCSS = {
   },
   output: {
     filename: 'style.css',
-    path: __dirname + '/dist/css'
+    path: __dirname + '/docs/css'
   },
   module: {
     rules: [
@@ -97,7 +97,7 @@ if (!isDev) {
     dry: true,
   }));
   JS.plugins.push(new UglifyJsPlugin());
-  SCSS.plugins.push(new CleanWebpackPlugin(['dist/css'], { // remove ./dist/css
+  SCSS.plugins.push(new CleanWebpackPlugin(['docs/css'], { // remove ./dist/css
     root: path.resolve('./'),
     verbose: true,
     dry: true,

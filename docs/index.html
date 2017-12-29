@@ -1,0 +1,94 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ScratchCard js</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/prism.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/lib/prism.js"></script>
+</head>
+<body>
+
+    <main class="max-width">
+        <!--<h1 class="title-main">ScratchCard js - demo</h1>-->
+
+        <!--<p class="text-intro">In this exemple if you scratch 50% of the canvas the callback is executed.</p>-->
+
+        <!--<br>-->
+
+        <!-- scratchcard -->
+
+        <div class="row">
+            <div class="scratch_container">
+                <div id="js--scratchcard--container"></div>
+                <!-- infos -->
+                <p id="js-show-percent" class="scratch_infos"></p>
+            </div>
+
+            <div>
+                <pre>
+                <code class="language-javascript">
+                var sc_1 = new ScratchCard('#js--scratchcard--container', {
+                    scratchType: SCRATCH_TYPE.SPRAY,
+                    containerWidth: document.getElementById('js--scratchcard--container').offsetWidth,
+                    containerHeight: document.getElementById('js--scratchcard--container').offsetHeight,
+                    imageForwardSrc: './images/scratchcard.png',
+                    imageBackgroundSrc: './images/scratchcard-background.png',
+                    clearZoneRadius: 50,
+                    nPoints: 30,
+                    pointSize: 4,
+                    callback: function() {
+                      alert('Good job !!');
+                    }
+                });
+
+                  sc_1.init().then(function() {
+                    const showPercent = document.getElementById('js-show-percent');
+                    sc_1.canvas.addEventListener('scratch.move', function() {
+                      var percent = sc_1.getPercent();
+                      showPercent.innerHTML = percent.toFixed(2) + '%';
+                    });
+                  }).catch((error) => {
+                    // Show alert if imageForwardSrc is not loaded
+                    alert(error.message);
+                  });
+                </code>
+                </pre>
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <!-- Scripts -->
+    <script src="./js/lib/scratchcard.js"></script>
+    <script type="text/javascript">
+      var sc_1 = new ScratchCard('#js--scratchcard--container', {
+        scratchType: SCRATCH_TYPE.SPRAY,
+        containerWidth: document.getElementById('js--scratchcard--container').offsetWidth,
+        containerHeight: document.getElementById('js--scratchcard--container').offsetHeight,
+        imageForwardSrc: './images/scratchcard.png',
+        imageBackgroundSrc: './images/scratchcard-background.png',
+        clearZoneRadius: 50,
+        nPoints: 30,
+        pointSize: 4,
+        callback: function() {
+          alert('Good job !!');
+        }
+      });
+      sc_1.init().then(function() {
+        const showPercent = document.getElementById('js-show-percent');
+        sc_1.canvas.addEventListener('scratch.move', function() {
+          var percent = sc_1.getPercent();
+          showPercent.innerHTML = percent.toFixed(2) + '%';
+        });
+      }).catch((error) => {
+        alert(error.message);
+      });
+    </script>
+</body>
+</html>
