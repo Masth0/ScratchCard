@@ -76,6 +76,7 @@ class ScratchCard {
 
     /*---- Events -----------------------------------------------------------------------*/
     this.canvas.addEventListener('mousedown', function (event) {
+      self.zone = self.canvas.getBoundingClientRect();
       self.canvas.addEventListener('mousemove', scratching);
       document.body.addEventListener('mouseup', function _func () {
         self.canvas.removeEventListener('mousemove', scratching);
