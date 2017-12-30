@@ -9,7 +9,7 @@ ScratchCard is a js lib to simulated a scratchcard in browser with html5 and can
 ## Install
 You can install ScratchCard with npm:
 ```
-npm install scratchcard-js
+npm install --save scratchcard-js
 ```
 or just clone this repo
 ```
@@ -20,7 +20,7 @@ and pick in the folder **./build** the file **scratchard.min.js**
 ## Getting started
 
 ```js
-import ScratchCard from 'scratchcard-js';
+import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js';
 
 let sc = new ScratchCard('#js--scratchcard--container', {
      scratchType: SCRATCH_TYPE.SPRAY,
