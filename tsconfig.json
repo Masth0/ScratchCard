@@ -2,7 +2,6 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "sourceMap": false,
-    "target": "es6",
-    "declaration": true
+    "target": "es6"
   }
 }
