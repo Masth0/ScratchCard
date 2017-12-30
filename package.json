@@ -2,7 +2,7 @@
   "name": "scratchcard-js",
   "version": "1.1.4",
   "description": "Create scratch card in browser.",
-  "main": "./build/js/scratchcard.min.js",
+  "main": "./build/scratchcard.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack",
     "build": "cross-env NODE_ENV=prod webpack"
