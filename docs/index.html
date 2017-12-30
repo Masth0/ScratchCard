@@ -27,37 +27,6 @@
                 <!-- infos -->
                 <p id="js-show-percent" class="scratch_infos"></p>
             </div>
-
-            <div>
-                <pre>
-                <code class="language-javascript">
-                var sc_1 = new ScratchCard('#js--scratchcard--container', {
-                    scratchType: SCRATCH_TYPE.SPRAY,
-                    containerWidth: document.getElementById('js--scratchcard--container').offsetWidth,
-                    containerHeight: document.getElementById('js--scratchcard--container').offsetHeight,
-                    imageForwardSrc: './images/scratchcard.png',
-                    imageBackgroundSrc: './images/scratchcard-background.png',
-                    clearZoneRadius: 50,
-                    nPoints: 30,
-                    pointSize: 4,
-                    callback: function() {
-                      alert('Good job !!');
-                    }
-                });
-
-                  sc_1.init().then(function() {
-                    const showPercent = document.getElementById('js-show-percent');
-                    sc_1.canvas.addEventListener('scratch.move', function() {
-                      var percent = sc_1.getPercent();
-                      showPercent.innerHTML = percent.toFixed(2) + '%';
-                    });
-                  }).catch((error) => {
-                    // Show alert if imageForwardSrc is not loaded
-                    alert(error.message);
-                  });
-                </code>
-                </pre>
-            </div>
         </div>
 
     </main>

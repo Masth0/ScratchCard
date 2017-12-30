@@ -160,12 +160,12 @@ class ScratchCard {
 
     switch (event.type) {
       case 'touchmove':
-        posX = event.touches[0].clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
-        posY = event.touches[0].clientY - this.config.clearZoneRadius - window.pageYOffset - this.zone.top;
+        posX = event.touches[0].clientX - this.config.clearZoneRadius - this.zone.left;
+        posY = event.touches[0].clientY - this.config.clearZoneRadius - this.zone.top;
         break;
       case 'mousemove':
-        posX = event.clientX - this.config.clearZoneRadius - window.pageXOffset - this.zone.left;
-        posY = event.clientY - this.config.clearZoneRadius - window.pageYOffset - this.zone.top;
+        posX = event.clientX - this.config.clearZoneRadius - this.zone.left;
+        posY = event.clientY - this.config.clearZoneRadius - this.zone.top;
         break;
     }
 

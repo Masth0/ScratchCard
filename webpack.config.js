@@ -91,7 +91,7 @@ const SCSS = {
 /*---- For production -----------------------------------------------------------------------*/
 if (!isDev) {
   JS.output.filename = '[name].min.js';
-  JS.plugins.push(new CleanWebpackPlugin(['dist/js'], { // remove ./dist/js
+  JS.plugins.push(new CleanWebpackPlugin(['./build'], { // remove ./build/js
     root: path.resolve('./'),
     verbose: true,
     dry: true,
