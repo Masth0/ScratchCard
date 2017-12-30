@@ -242,4 +242,4 @@ class ScratchCard {
 (<any>window).ScratchCard = ScratchCard;
 (<any>window).SCRATCH_TYPE = SCRATCH_TYPE;
 
-export default ScratchCard;
+export {ScratchCard, SCRATCH_TYPE};
