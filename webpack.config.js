@@ -15,13 +15,13 @@ const JS = {
   devtool: isDev ? 'inline-source-map' : false,
   entry: {
     scratchcard: './ScratchCard.ts',
-    '../../build/js/scratchcard': './ScratchCard.ts'
+    '../../../build/scratchcard': './ScratchCard.ts'
   },
   output: {
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',
     path: __dirname + '/docs/js/lib',
-    library: 'ScratchCard.default',
+    library: undefined,
     libraryTarget: 'umd'
   },
   resolve: {
