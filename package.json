@@ -7,6 +7,10 @@
     "dev": "cross-env NODE_ENV=dev webpack",
     "build": "cross-env NODE_ENV=prod webpack"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Masth0/ScratchCard"
+  },
   "keywords": [
     "canvas",
     "javascript",
