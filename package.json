@@ -8,8 +8,8 @@
     "build": "cross-env NODE_ENV=prod webpack"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Masth0/ScratchCard"
+    "type": "git",
+    "url": "https://github.com/Masth0/ScratchCard"
   },
   "keywords": [
     "canvas",
