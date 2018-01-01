@@ -1,6 +1,6 @@
 {
   "name": "scratchcard-js",
-  "version": "1.2.6",
+  "version": "1.3.0",
   "description": "Create scratch card in browser.",
   "main": "./build/scratchcard.min.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "keywords": [
     "canvas",
     "javascript",
-    "typescript",
+    "scratchcard",
     "scratch card"
   ],
   "author": "Masth0 <dev.mastho@gmail.com>",
