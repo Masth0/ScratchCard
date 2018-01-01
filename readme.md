@@ -4,6 +4,8 @@
 
 ScratchCard is a js lib to simulated a scratchcard in browser with html5 and canvas.
 
+You can see the [**demo page**](https://masth0.github.io/ScratchCard/).
+
 ![version](scratchcard-js.png)
 
 ## Install
