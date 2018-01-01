@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "sourceMap": false,
+    "target": "es6"
+  }
+}

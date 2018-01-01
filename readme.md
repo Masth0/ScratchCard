@@ -1,51 +1,62 @@
-# ScratchCard
-ScratchCard is a library javascript to generate scratch card (HTML5, canvas)
-in modern browsers with touch events support. Here the demo page: [**DEMO**] (https://masth0.github.io/ScratchCard/)
+# Scratchcard-js 
+![Build](https://travis-ci.org/Masth0/ScratchCard.svg?branch=v2)
+![version](https://img.shields.io/npm/v/scratchcard-js.svg)
 
-## Options
-- **canvasId :** Id string of canvas
-- **canvasWidth :** Canvas width
-- **canvasHeight :** Canvas height
-- **imageBackground :** Path to background image
-- **pictureOver :** Path to foreground image
-- **radius :** Radius of clear zone 
-- **nPoints :** Number of points generate inside the clear zone
-- **pointSize :** {  
-	**x :** Number,  
-	**y :** Number  
-	} 
-- **percent :** When clear the canvas after 'mouseup' event
-- **callback :** Function executed after canvas clearing
-- **cursor :** {  
-	        **png :** // Path to the .png for modern browsers  
-	        **x :** // Move position x  
-	        **y :** // Move position y  
-	        **cur :** // Path to the .cur for internet explorer  
-    }
-    
-## Javascript init
+ScratchCard is a js lib to simulated a scratchcard in browser with html5 and canvas.
 
+![version](scratchcard-js.png)
+
+## Install
+You can install ScratchCard with npm:
 ```
-var scratch = new Scratch({
-	canvasId: 'js-scratch-canvas',
-	imageBackground: '/path/to/image',
-	pictureOver: '/path/to/image',
-	canvasWidth: 250,
-	canvasHeight: 250,
-	cursor: {
-		png: '/path/to/cursor.png',
-		cur: '/path/to/cursor.cur',
-		x: '20',
-		y: '17'
-	},
-	radius: 20,
-	nPoints: 100,
-	percent: 50,
-	callback: function () {
-		alert('I am Callback.');
-	},
-	pointSize: { x: 3, y: 3}
+npm install --save scratchcard-js
+```
+or just clone this repo
+```
+git clone https://github.com/Masth0/ScratchCard.git
+```
+and pick in the folder **./build** the file **scratchard.min.js**
+
+## Getting started
+
+```js
+import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js';
+
+let sc = new ScratchCard('#js--scratchcard--container', {
+     scratchType: SCRATCH_TYPE.SPRAY,
+     containerWidth: 300,
+     containerHeight: 300,
+     imageForwardSrc: './images/scratchcard.png',
+     imageBackgroundSrc: './images/scratchcard-background.png',
+     clearZoneRadius: 50,
+     nPoints: 30,
+     pointSize: 4,
+     callback: function() {
+         alert('done.')
+     }
+ });
+
+// Init the scratchcard
+// ScratchCard check if the imageForwardSrc is loaded before continuing for not reveal the background image.
+sc.init().then(() => {
+  // complete, doing what you want. Get the percent of scratchcard ?
+  test.canvas.addEventListener('scratch.move', function() {
+    let percent = test.getPercent();
+    console.log(percent);
+  });
+}).catch((error) => {
+  alert(error.message);
 });
 ```
 
-[MIT License](LICENSE.md). © Masth0
+## Brushes (coming soon)
+...
+
+## Events
+**'scratch.move'**
+```js
+sc.canvas.addEventListener('scratch.move', function() {
+  let percent = test.getPercent();
+  console.log(percent);
+});
+```
