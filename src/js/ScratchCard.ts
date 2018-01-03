@@ -86,6 +86,7 @@ class ScratchCard {
 
     // Mobile events
     this.canvas.addEventListener('touchstart', function (event) {
+      event.preventDefault();
       self.canvas.addEventListener('touchmove', scratching);
       document.body.addEventListener('touchend', function _func () {
         self.canvas.removeEventListener('touchmove', scratching);
@@ -98,6 +99,11 @@ class ScratchCard {
       this.zone = this.canvas.getBoundingClientRect();
       this.redraw();
     }, 100));
+
+    // Update canvas positions when the window has been scrolled
+    window.addEventListener('scroll', throttle(() => {
+      this.zone = this.canvas.getBoundingClientRect();
+    }, 16));
   }
 
   /**
