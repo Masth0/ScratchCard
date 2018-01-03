@@ -24,6 +24,7 @@ class ScratchCard {
       scratchType: SCRATCH_TYPE.SPRAY,
       containerWidth: 100,
       containerHeight: 100,
+      percentToFinish: 50,
       nPoints: 100,
       pointSize: [10, 10],
         callback: function() {
@@ -67,16 +68,6 @@ class ScratchCard {
 
       // calculate the percent of area scratched.
       self.percent = self.updatePercent();
-
-      // Exec the callback once
-      if (!self.callbackDone && self.percent > 50) {
-        self.clear();
-        self.canvas.style.pointerEvents = 'none';
-        if (self.config.callback !== undefined) {
-          self.callbackDone = true;
-          self.config.callback();
-        }
-      }
     }, 16);
 
     /*---- Events -----------------------------------------------------------------------*/
@@ -85,6 +76,7 @@ class ScratchCard {
       self.canvas.addEventListener('mousemove', scratching);
       document.body.addEventListener('mouseup', function _func () {
         self.canvas.removeEventListener('mousemove', scratching);
+        self.finish(); // clear and callback
         this.removeEventListener('mouseup', _func);
       });
     });
@@ -95,6 +87,7 @@ class ScratchCard {
       self.canvas.addEventListener('touchmove', scratching);
       document.body.addEventListener('touchend', function _func () {
         self.canvas.removeEventListener('touchmove', scratching);
+        self.finish(); // clear and callback
         this.removeEventListener('touchend', _func);
       });
     });
@@ -117,6 +110,18 @@ class ScratchCard {
    */
   getPercent () {
     return this.percent;
+  }
+
+  finish () {
+    // Exec the callback once
+    if (!this.callbackDone && this.percent > this.config.percentToFinish) {
+      this.clear();
+      this.canvas.style.pointerEvents = 'none';
+      if (this.config.callback !== undefined) {
+        this.callbackDone = true;
+        this.config.callback();
+      }
+    }
   }
 
   /**

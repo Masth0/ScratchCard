@@ -13,6 +13,7 @@ export interface SC_CONFIG {
   clearZoneRadius: number,
   nPoints: number,
   pointSize: number,
+  percentToFinish: number
   callback ?: () => void,
   brushSrc: string,
   cursor: {
