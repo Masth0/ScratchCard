@@ -16,6 +16,7 @@ class ScratchCard {
   private readyToClear: Boolean;
   private brush: Brush;
   private brushImage: any;
+  private callbackDone: Boolean;
   
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
@@ -40,6 +41,7 @@ class ScratchCard {
     this.position = [0, 0]; // init position
     this.readyToClear = false;
     this.percent = 0;
+    this.callbackDone = false;
 
     // Create and add the canvas
     this.generateCanvas();
@@ -57,6 +59,7 @@ class ScratchCard {
 
     /*---- Scratching method , call in throttle event ------------------------------------*/
     let scratching = throttle((event: Event) => {
+      event.preventDefault();
       self.dispatchEvent('scratch', 'move');
       self.position = self.mousePosition(event);
       self.brush.updateMousePosition(self.position[0], self.position[1]);
@@ -64,11 +67,13 @@ class ScratchCard {
 
       // calculate the percent of area scratched.
       self.percent = self.updatePercent();
-      
-      if (self.percent > 50) {
+
+      // Exec the callback once
+      if (!self.callbackDone && self.percent > 50) {
         self.clear();
         self.canvas.style.pointerEvents = 'none';
         if (self.config.callback !== undefined) {
+          self.callbackDone = true;
           self.config.callback();
         }
       }
