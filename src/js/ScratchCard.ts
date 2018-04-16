@@ -34,6 +34,7 @@ class ScratchCard {
       imageForwardSrc: './images/scratchcard.png',
       imageBackgroundSrc: './images/scratchcard-background.svg',
       clearZoneRadius: 0,
+      enabledPercentUpdate: true,
     };
 
     this.config = Object.assign(defaults, config);
@@ -67,7 +68,9 @@ class ScratchCard {
       self.scratch();
 
       // calculate the percent of area scratched.
-      self.percent = self.updatePercent();
+      if (this.config.enabledPercentUpdate) {
+        self.percent = self.updatePercent();
+      }
     }, 16);
 
     /*---- Events -----------------------------------------------------------------------*/
