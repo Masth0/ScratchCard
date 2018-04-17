@@ -20,5 +20,6 @@ export interface SC_CONFIG {
     cur: string,
     png: string,
     poosition: number[]
-  }
+  },
+  enabledPercentUpdate: boolean
 }
