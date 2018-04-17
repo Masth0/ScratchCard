@@ -1,6 +1,6 @@
 {
   "name": "scratchcard-js",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Create scratch card in browser.",
   "main": "./build/scratchcard.min.js",
   "scripts": {
@@ -20,26 +20,19 @@
   "author": "Masth0 <dev.mastho@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
-    "browser-sync": "^2.21.0",
+    "browser-sync": "^2.23.6",
     "browser-sync-webpack-plugin": "^1.2.0",
-    "clean-webpack-plugin": "^0.1.16",
-    "cross-env": "^5.1.3",
-    "css-loader": "^0.28.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.4",
     "extract-text-webpack-plugin": "^3.0.2",
-    "node-sass": "^4.7.2",
-    "postcss-loader": "^2.0.9",
-    "resolve-url-loader": "^2.2.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
     "ts-loader": "^2.3.7",
-    "typescript": "^2.6.2",
-    "uglifyjs-webpack-plugin": "^1.1.5",
-    "webpack": "^3.10.0"
+    "typescript": "^2.8.1",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^3.11.0"
   },
   "browsers": [
     "last 2 versions",
