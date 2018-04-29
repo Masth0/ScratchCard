@@ -10,6 +10,7 @@ export interface SC_CONFIG {
   containerHeight: number,
   imageForwardSrc: string,
   imageBackgroundSrc: string,
+  htmlBackground: string,
   clearZoneRadius: number,
   nPoints: number,
   pointSize: number,

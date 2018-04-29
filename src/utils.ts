@@ -80,3 +80,17 @@ export function dispatchCustomEvent (target: HTMLCanvasElement, type: string, de
   });
   target.dispatchEvent(customEvent);
 }
+
+/**
+ * Inject html behind the canvas
+ * @param {string} html 
+ * @param {HTMLElement} target 
+ */
+export function injectHTML (html: string, target: HTMLElement) {
+  let parser = new DOMParser();
+  let wrapper = document.createElement('div');
+  wrapper.classList.add('sc__inner'); 
+  let content = parser.parseFromString(html, 'text/xml'); // > IE 11
+  wrapper.innerHTML = content.body.innerHTML
+  target.insertBefore(wrapper, target.firstElementChild);
+}

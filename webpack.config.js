@@ -1,17 +1,26 @@
-const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const isDev = process.env.NODE_ENV === 'dev';
+const devMode = process.env.NODE_ENV == 'development';
 
-/*---- Javascript config -----------------------------------------------------------------------*/
-const JS = {
-  name: 'js',
-  context: path.resolve('./src/js/'),
-  watch: isDev,
-  devtool: isDev ? 'inline-source-map' : false,
+let config = {
+  name: 'Assets',
+  context: path.resolve('./src'),
+  mode: devMode ? 'development' : 'production',
+  watch: devMode,
+  devServer: {
+    overlay: true,
+    // CORS
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
+  },
+  performance: {
+    hints: devMode ? false : 'warning',
+  },
   entry: {
-    scratchcard: './ScratchCard.ts',
+    scratchcard: './ScratchCard.ts'
   },
   output: {
     filename: '[name].js',
@@ -35,16 +44,12 @@ const JS = {
   plugins: []
 };
 
-/*---- For production -----------------------------------------------------------------------*/
-if (!isDev) {
-  JS.output.filename = '[name].min.js';
-  JS.plugins.push(new CleanWebpackPlugin(['./build'], { // remove ./build/js
-    root: path.resolve('./'),
+if (!devMode) {
+  config.plugins.unshift(new CleanWebpackPlugin(['./build'], {
+    root: path.join(__dirname, './dist'),
     verbose: true,
     dry: false,
   }));
-  JS.plugins.push(new UglifyJsPlugin());
 }
 
-/*---- Export -----------------------------------------------------------------------*/
-module.exports = [JS];
+module.exports = config;

@@ -1,8 +1,9 @@
-import {SC_CONFIG, SCRATCH_TYPE} from './ScratchCardConfig';
-import {randomPoint, loadImage, throttle, dispatchCustomEvent} from './utils';
+import {SC_CONFIG} from './ScratchCardConfig';
+import {SCRATCH_TYPE} from './ScratchCardConfig';
+import {randomPoint, loadImage, throttle, dispatchCustomEvent, injectHTML} from './utils';
 import Brush from './Brush';
 
-class ScratchCard {
+export class ScratchCard {
   readonly config: SC_CONFIG;
   private defaults: SC_CONFIG;
   public percent: number; 
@@ -12,7 +13,7 @@ class ScratchCard {
   private zone: ClientRect;
   private canvas: HTMLCanvasElement;
   private position: number[];
-  private scratchType: SCRATCH_TYPE;
+  readonly scratchType: SCRATCH_TYPE;
   private readyToClear: Boolean;
   private brush: Brush;
   private brushImage: any;
@@ -33,6 +34,7 @@ class ScratchCard {
       brushSrc: '',
       imageForwardSrc: './images/scratchcard.png',
       imageBackgroundSrc: './images/scratchcard-background.svg',
+      htmlBackground: '',
       clearZoneRadius: 0,
       enabledPercentUpdate: true,
     };
@@ -111,7 +113,7 @@ class ScratchCard {
    * Get percent of scratchCard
    * @returns {number}
    */
-  getPercent () {
+  getPercent (): number {
     return this.percent;
   }
 
@@ -163,14 +165,18 @@ class ScratchCard {
   }
 
   private setBackground (): void {
-    let image = document.createElement('img');
-    loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {    
-      image.src = img.src;
-      this.container.insertBefore(image, this.canvas);
-    }, (error) => {
-      // Stop all script here
-      console.log(error.message);
-    });
+    if (this.config.htmlBackground.length !== 0) {
+      injectHTML(this.config.htmlBackground, this.container);
+    } else {
+      let image = document.createElement('img');
+      loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {    
+        image.src = img.src;
+        this.container.insertBefore(image, this.canvas);
+      }, (error) => {
+        // Stop all script here
+        console.log(error.message);
+      });
+    }
   };
 
   mousePosition (event: any): number[] {
@@ -262,4 +268,4 @@ class ScratchCard {
 (<any>window).ScratchCard = ScratchCard;
 (<any>window).SCRATCH_TYPE = SCRATCH_TYPE;
 
-export {ScratchCard, SCRATCH_TYPE};
+export default {ScratchCard,SCRATCH_TYPE};
