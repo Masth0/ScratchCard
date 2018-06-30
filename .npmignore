@@ -12,3 +12,4 @@
 config.gypi
 CVS
 npm-debug.log
+.travis.yml

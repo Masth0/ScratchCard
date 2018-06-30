@@ -23,7 +23,7 @@ let config = {
     scratchcard: './ScratchCard.ts'
   },
   output: {
-    filename: '[name].js',
+    filename: devMode ? '[name].js' : '[name].min.js',
     chunkFilename: '[name].bundle.js',
     path: __dirname + '/build',
     library: undefined,
