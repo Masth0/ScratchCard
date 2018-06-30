@@ -39,7 +39,7 @@ export class ScratchCard {
       enabledPercentUpdate: true,
     };
 
-    this.config = Object.assign(defaults, config);
+    this.config = {...defaults, ...config};
     this.scratchType = this.config.scratchType;
     this.container = <HTMLElement> document.querySelector(selector);
     this.position = [0, 0]; // init position
@@ -139,14 +139,14 @@ export class ScratchCard {
   }
 
   init (): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject: any) => {
       loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
         this.scratchImage = img;
         this.ctx.drawImage(this.scratchImage, 0, 0, this.canvas.width, this.canvas.height);
         this.setBackground();
         // Resolve the promise init
         resolve();
-      }, (event) => {
+      }, (event: Event): Error => {
         // Reject init
         reject(event);
         return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
@@ -172,7 +172,7 @@ export class ScratchCard {
       loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {    
         image.src = img.src;
         this.container.insertBefore(image, this.canvas);
-      }, (error) => {
+      }, (error: Error) => {
         // Stop all script here
         console.log(error.message);
       });

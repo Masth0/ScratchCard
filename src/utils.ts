@@ -12,8 +12,8 @@ export function randomPoint (min: number, max: number) {
  * Make a promise to load image
  * @param src {String}
  */
-export function loadImage(src: string) {
-  return new Promise((resolve, reject) => {
+export function loadImage(src: string): Promise<any> {
+  return new Promise((resolve: Function, reject: Function) => {
     let image = new Image();
     image.crossOrigin = 'Anonymous'; // Work only if the server response headers contains [Access-Control-Allow-Origin: *]
     image.onload = () => {
@@ -90,7 +90,7 @@ export function injectHTML (html: string, target: HTMLElement) {
   let parser = new DOMParser();
   let wrapper = document.createElement('div');
   wrapper.classList.add('sc__inner'); 
-  let content = parser.parseFromString(html, 'text/xml'); // > IE 11
+  let content = parser.parseFromString(html, 'text/html'); // > IE 11
   wrapper.innerHTML = content.body.innerHTML;
   target.insertBefore(wrapper, target.firstElementChild);
 }
