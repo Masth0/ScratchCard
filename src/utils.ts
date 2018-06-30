@@ -91,6 +91,6 @@ export function injectHTML (html: string, target: HTMLElement) {
   let wrapper = document.createElement('div');
   wrapper.classList.add('sc__inner'); 
   let content = parser.parseFromString(html, 'text/xml'); // > IE 11
-  wrapper.innerHTML = content.body.innerHTML
+  wrapper.innerHTML = content.body.innerHTML;
   target.insertBefore(wrapper, target.firstElementChild);
 }

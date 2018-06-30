@@ -5,20 +5,20 @@ import Brush from './Brush';
 
 export class ScratchCard {
   readonly config: SC_CONFIG;
+  private position: number[];
+  readonly scratchType: SCRATCH_TYPE;
+  readonly brushImage: any;
+  readonly ctx: CanvasRenderingContext2D;
+  readonly container: HTMLElement;
   private defaults: SC_CONFIG;
-  public percent: number; 
-  private ctx: CanvasRenderingContext2D;
-  private container: HTMLElement;
   private scratchImage: HTMLImageElement;
   private zone: ClientRect;
   private canvas: HTMLCanvasElement;
-  private position: number[];
-  readonly scratchType: SCRATCH_TYPE;
   private readyToClear: Boolean;
   private brush: Brush;
-  private brushImage: any;
   private callbackDone: Boolean;
-  
+  public percent: number;
+
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
     const defaults = {
