@@ -22,7 +22,7 @@ and pick in the folder **./build** the file **scratchard.min.js**
 ## Getting started
 
 ```js
-import {ScratchCard, SCRATCH_TYPES} from 'scratchcard-js'
+import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js'
 
 const scContainer = document.getElementById('js--sc--container')
 const sc = new ScratchCard('#js--sc--container', {
