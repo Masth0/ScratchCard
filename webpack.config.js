@@ -46,7 +46,7 @@ let config = {
 
 if (!devMode) {
   config.plugins.unshift(new CleanWebpackPlugin(['./build'], {
-    root: path.join(__dirname, './dist'),
+    root: path.resolve(__dirname, './'),
     verbose: true,
     dry: false,
   }));

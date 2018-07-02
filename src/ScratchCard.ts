@@ -1,9 +1,9 @@
 import {SC_CONFIG} from './ScratchCardConfig';
 import {SCRATCH_TYPE} from './ScratchCardConfig';
-import {randomPoint, loadImage, throttle, dispatchCustomEvent, injectHTML} from './utils';
+import {loadImage, throttle, dispatchCustomEvent, injectHTML} from './utils';
 import Brush from './Brush';
 
-export class ScratchCard {
+class ScratchCard {
   readonly config: SC_CONFIG;
   private position: number[];
   readonly scratchType: SCRATCH_TYPE;
@@ -268,4 +268,4 @@ export class ScratchCard {
 (<any>window).ScratchCard = ScratchCard;
 (<any>window).SCRATCH_TYPE = SCRATCH_TYPE;
 
-export default {ScratchCard,SCRATCH_TYPE};
+export {ScratchCard, SCRATCH_TYPE};

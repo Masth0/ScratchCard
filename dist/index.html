@@ -14,12 +14,12 @@
     <div id="js--sc--container"></div>
 
     <!-- Scripts -->
-    <script src="../build/scratchcard.js"></script>
+    <script src="../build/scratchcard.min.js"></script>
     <script type="text/javascript">
         var scContainer = document.getElementById('js--sc--container');
         var sc = new ScratchCard('#js--sc--container', {
           enabledPercentUpdate: true,
-          scratchType: SCRATCH_TYPE.SPRAY,
+          scratchType: SCRATCH_TYPE.CIRCLE,
           containerWidth: scContainer.offsetWidth,
           containerHeight: 300,
           imageForwardSrc: './images/scratchcard.png',
@@ -30,8 +30,8 @@
           nPoints: 30,
           pointSize: 4,
           callback: function () {
-            alert('Now the window will reload !')
-            window.location.reload()
+            alert('Now the window will reload !');
+            window.location.reload();
           }
         })
         sc.init();

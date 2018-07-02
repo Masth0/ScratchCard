@@ -1,5 +1,3 @@
-import {loadImage} from "./utils";
-
 export default class Brush {
   readonly ctx: CanvasRenderingContext2D;
   public mouseX: number;
@@ -51,9 +49,8 @@ export default class Brush {
    */
   spray (area: number, dropsSize: number, dropsCount: number) {
     let i = 0;
-    let dropsLength = dropsCount;
 
-    for (i; i < dropsLength; i++) {
+    for (i; i < dropsCount; i++) {
       let points = this.clearPoint(area / 2);
       this.ctx.beginPath();
       this.ctx.arc(points[0] + (area / 2), points[1] + (area / 2), dropsSize / 2, 0, Math.PI * 2, false);

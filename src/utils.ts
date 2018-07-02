@@ -12,8 +12,8 @@ export function randomPoint (min: number, max: number) {
  * Make a promise to load image
  * @param src {String}
  */
-export function loadImage(src: string): Promise<any> {
-  return new Promise((resolve: Function, reject: Function) => {
+export function loadImage(src: string) {
+  return new Promise((resolve, reject) => {
     let image = new Image();
     image.crossOrigin = 'Anonymous'; // Work only if the server response headers contains [Access-Control-Allow-Origin: *]
     image.onload = () => {
