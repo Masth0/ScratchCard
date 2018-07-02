@@ -31,6 +31,7 @@ const sc = new ScratchCard('#js--sc--container', {
   containerHeight: 300,
   imageForwardSrc: '/images/scratchcard.jpg',
   imageBackgroundSrc: '/images/result.png',
+  htmlBackground: '<p class="test"><strong>Hello i am HTML content !</strong></p>',
   clearZoneRadius: 50,
   nPoints: 30,
   pointSize: 4,
@@ -51,9 +52,6 @@ sc.init().then(() => {
   alert(error.message);
 });
 ```
-
-## Brushes (coming soon)
-...
 
 ## Events
 **'scratch.move'**
