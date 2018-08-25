@@ -100,7 +100,6 @@ class ScratchCard {
     // Update canvas positions when the window has been resized
     window.addEventListener('resize', throttle(() => {
       this.zone = this.canvas.getBoundingClientRect();
-      this.redraw();
     }, 100));
 
     // Update canvas positions when the window has been scrolled
@@ -242,17 +241,6 @@ class ScratchCard {
     }
 
     return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
-  }
-
-  redraw () {
-    let oldWidth = this.config.containerWidth;
-    let newWidth = this.zone.width;
-    if (newWidth < oldWidth) {
-      this.ctx.clearRect(0, 0, this.zone.width, this.zone.height);
-      this.canvas.width = this.zone.width;
-      this.canvas.height = this.zone.height;
-      this.ctx.drawImage(this.scratchImage, 0, 0, this.zone.width, this.zone.height);
-    }
   }
   
   /**
