@@ -68,6 +68,7 @@ export default class Brush {
   static generateBrush (imgSrc: string): HTMLImageElement {
     if (imgSrc.length !== 0) {
       let brush = new Image();
+      brush.crossOrigin = 'Anonymous'; // Works only if the server response headers contains [Access-Control-Allow-Origin: *]
       brush.src = imgSrc;
       return brush;
     } else {
