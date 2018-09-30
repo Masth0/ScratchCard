@@ -9,6 +9,7 @@ let config = {
   watch: devMode,
   devServer: {
     overlay: true,
+    stats: 'errors-only',
     // CORS
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -43,13 +44,5 @@ let config = {
   },
   plugins: []
 };
-
-// if (!devMode) {
-//   config.plugins.unshift(new CleanWebpackPlugin(['./build'], {
-//     root: path.resolve(__dirname, './'),
-//     verbose: true,
-//     dry: false,
-//   }));
-// }
 
 module.exports = config;
