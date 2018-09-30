@@ -7,7 +7,7 @@ class ScratchCard {
   readonly config: SC_CONFIG;
   private position: number[];
   readonly scratchType: SCRATCH_TYPE;
-  readonly brushImage: any;
+  public brushImage: any;
   readonly ctx: CanvasRenderingContext2D;
   readonly container: HTMLElement;
   private defaults: SC_CONFIG;
@@ -58,7 +58,9 @@ class ScratchCard {
 
     // Init the brush if  necessary
     if (this.config.scratchType === SCRATCH_TYPE.BRUSH) {
-      this.brushImage = Brush.generateBrush(this.config.brushSrc);
+      loadImage(this.config.brushSrc).then(image => {
+        this.brushImage = image;
+      });
     }
 
     /*---- Scratching method , call in throttle event ------------------------------------*/
