@@ -1,6 +1,6 @@
 import {SC_CONFIG} from './ScratchCardConfig';
 import {SCRATCH_TYPE} from './ScratchCardConfig';
-import {loadImage, throttle, dispatchCustomEvent, injectHTML} from './utils';
+import { loadImage, throttle, dispatchCustomEvent, injectHTML, getOffset } from './utils'
 import Brush from './Brush';
 
 class ScratchCard {
@@ -12,7 +12,7 @@ class ScratchCard {
   readonly container: HTMLElement;
   private defaults: SC_CONFIG;
   private scratchImage: HTMLImageElement;
-  private zone: ClientRect;
+  public zone: {top: number, left: number};
   private canvas: HTMLCanvasElement;
   private readyToClear: Boolean;
   private brush: Brush;
@@ -51,7 +51,6 @@ class ScratchCard {
     this.generateCanvas();
 
     this.ctx = this.canvas.getContext('2d');
-    this.zone = this.canvas.getBoundingClientRect();
 
     // Init the brush instance
     this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
@@ -79,7 +78,8 @@ class ScratchCard {
 
     /*---- Events -----------------------------------------------------------------------*/
     this.canvas.addEventListener('mousedown', function (event) {
-      self.zone = self.canvas.getBoundingClientRect();
+      event.preventDefault();
+      self._setScratchPosition();
       self.canvas.addEventListener('mousemove', scratching);
       document.body.addEventListener('mouseup', function _func () {
         self.canvas.removeEventListener('mousemove', scratching);
@@ -91,6 +91,7 @@ class ScratchCard {
     // Mobile events
     this.canvas.addEventListener('touchstart', function (event) {
       event.preventDefault();
+      self._setScratchPosition();
       self.canvas.addEventListener('touchmove', scratching);
       document.body.addEventListener('touchend', function _func () {
         self.canvas.removeEventListener('touchmove', scratching);
@@ -101,12 +102,12 @@ class ScratchCard {
 
     // Update canvas positions when the window has been resized
     window.addEventListener('resize', throttle(() => {
-      this.zone = this.canvas.getBoundingClientRect();
+      this._setScratchPosition();
     }, 100));
 
     // Update canvas positions when the window has been scrolled
     window.addEventListener('scroll', throttle(() => {
-      this.zone = this.canvas.getBoundingClientRect();
+      this._setScratchPosition();
     }, 16));
   }
 
@@ -116,6 +117,15 @@ class ScratchCard {
    */
   getPercent (): number {
     return this.percent;
+  }
+
+  /**
+   * Return the top and left position
+   * @private
+   */
+  private _setScratchPosition () {
+    this.zone = getOffset(this.canvas);
+    console.log(this.zone);
   }
 
   finish () {

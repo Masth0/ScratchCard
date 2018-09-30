@@ -94,3 +94,31 @@ export function injectHTML (html: string, target: HTMLElement) {
   wrapper.innerHTML = content.body.innerHTML;
   target.insertBefore(wrapper, target.firstElementChild);
 }
+
+/**
+ * Get the real offset
+ * @param element
+ * @returns {Object} offset
+ */
+export function getOffset (element: HTMLElement) {
+  let offset = {
+    left: 0,
+    top: 0
+  };
+  let clientRect = element.getBoundingClientRect();
+
+  while (element) {
+    offset.top += element.offsetTop;
+    offset.left += element.offsetLeft;
+    element = <HTMLElement>element.offsetParent;
+  }
+
+  // Calculate the delta between offset values and clientRect values
+  let deltaLeft = offset.left - clientRect.left;
+  let deltaTop = offset.top - clientRect.top;
+
+  return {
+    left: (deltaLeft < 0) ? offset.left + Math.abs(deltaLeft) : offset.left - Math.abs(deltaLeft),
+    top: (deltaTop < 0) ? offset.top + Math.abs(deltaTop) : offset.top - Math.abs(deltaTop)
+  };
+}

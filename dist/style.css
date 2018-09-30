@@ -1,3 +1,14 @@
+@keyframes move {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+}
+
 #js--sc--container {
   position: relative;
   margin: 0 auto;
@@ -8,6 +19,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  transform: translateY(100px);
+  opacity: 1;
+  animation: move 2s;
 }
 
 #js--sc--container:before {
