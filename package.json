@@ -4,7 +4,7 @@
   "description": "Create scratch card in browser.",
   "main": "./build/scratchcard.min.js",
   "scripts": {
-    "dev": "NODE_ENV=development concurrently \"webpack\" \"webpack-dev-server\" ",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack\" \"webpack-dev-server\" ",
     "build": "webpack"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.1",
     "webpack": "^4.20.2",
