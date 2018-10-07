@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-- node
+  - node
 before_install:
-- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+  - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 before_script:
-- npm install
+  - npm install
 script:
-- npm run build
+  - npm run build
 cache:
   directories:
-  - node_modules
+    - node_modules
 deploy:
   provider: npm
   email: "dev.mastho@gmail.com"
