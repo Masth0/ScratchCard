@@ -57,7 +57,7 @@ sc.init().then(() => {
 **'scratch.move'**
 ```js
 sc.canvas.addEventListener('scratch.move', function() {
-  let percent = test.getPercent();
+  let percent = sc.getPercent();
   console.log(percent);
 });
 ```
