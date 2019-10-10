@@ -2,18 +2,16 @@
 ![Build](https://travis-ci.org/Masth0/ScratchCard.svg?branch=v2)
 ![version](https://img.shields.io/npm/v/scratchcard-js.svg)
 
-ScratchCard is a js lib to simulated a scratchcard in browser with html5 and canvas.
+ScratchCard is a js lib to simulate a scratchcard in browser with html5 and canvas.
 
 You can see the [**demo page**](https://masth0.github.io/ScratchCard/).
-
-![version](scratchcard-js.png)
 
 ## Install
 You can install ScratchCard with npm:
 ```
 npm install --save scratchcard-js
 ```
-or just clone this repo
+or just clone this repo:
 ```
 git clone https://github.com/Masth0/ScratchCard.git
 ```
