@@ -1,6 +1,7 @@
 module.exports = {
   theme: '',
-  title: ' ScratchCard',
+  title: ' ScratchCard-js',
+  plugins: ['@vuepress/active-header-links'],
   head: [
     { text: 'Home', link: '/' },
   ],
@@ -16,10 +17,14 @@ module.exports = {
         text: 'Brushes',
         ariaLabel: 'Brushes menu',
         items: [
+          { text: 'Spray', link: '/brushes/spray/' },
           { text: 'Circle', link: '/brushes/circle/' },
+          { text: 'Brush', link: '/brushes/brush/' },
+          { text: 'Html background', link: '/brushes/html-bg/' },
         ]
       },
       { text: 'github', link: 'https://github.com/fluffy-factory/toolbox' },
+      { text: 'npm', link: 'https://www.npmjs.com/package/scratchcard-js' },
     ],
   }
 };

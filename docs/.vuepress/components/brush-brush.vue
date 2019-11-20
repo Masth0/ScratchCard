@@ -11,6 +11,7 @@
                 <p>0%</p>
             </div>
         </div>
+        <br><br>
     </div>
 </template>
 
@@ -72,13 +73,14 @@
         const scContainer = document.getElementById('js--sc--container')
         const scInfos = document.querySelector('.sc__infos');
         const sc = new ScratchCard('#js--sc--container', {
-          scratchType: SCRATCH_TYPE.CIRCLE,
+          scratchType: SCRATCH_TYPE.BRUSH,
           containerWidth: scContainer.offsetWidth,
           containerHeight: 300,
+          brushSrc: '/images/brush.png',
           imageForwardSrc: '/images/scratchcard.jpg',
           imageBackgroundSrc: '/images/result.png',
           htmlBackground: '',
-          clearZoneRadius: 20,
+          clearZoneRadius: 0,
           nPoints: 30,
           pointSize: 4,
           callback: function () {

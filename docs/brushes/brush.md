@@ -1,6 +1,10 @@
-# Circle
+# Brush
 
-<brush-circle></brush-circle>
+<brush-brush></brush-brush>
+
+:::warning
+The **brushSrc** is mandatory and the **clearZoneRadius** must be set to **0**.
+:::
 
 ## html
 ```html
@@ -68,19 +72,20 @@
 }
 ```
 ## Javascript
-```js{4,10}
+``` js{4,7,11}
 const scContainer = document.getElementById('js--sc--container')
 const scInfos = document.querySelector('.sc__infos');
 const sc = new ScratchCard('#js--sc--container', {
-  scratchType: SCRATCH_TYPE.CIRCLE,
+  scratchType: SCRATCH_TYPE.BRUSH,
   containerWidth: scContainer.offsetWidth,
   containerHeight: 300,
+  brushSrc: '/images/brush.png',
   imageForwardSrc: '/images/scratchcard.jpg',
   imageBackgroundSrc: '/images/result.png',
   htmlBackground: '',
-  clearZoneRadius: 20,
-  nPoints: 0,
-  pointSize: 0,
+  clearZoneRadius: 0,
+  nPoints: 30,
+  pointSize: 4,
   callback: function () {
     alert('Now the window will reload !')
     window.location.reload()

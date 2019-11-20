@@ -1,6 +1,6 @@
-# Circle
+# Spray
 
-<brush-circle></brush-circle>
+<brush-spray></brush-spray>
 
 ## html
 ```html
@@ -68,19 +68,19 @@
 }
 ```
 ## Javascript
-```js{4,10}
+```js{4,10,11,12}
 const scContainer = document.getElementById('js--sc--container')
 const scInfos = document.querySelector('.sc__infos');
 const sc = new ScratchCard('#js--sc--container', {
-  scratchType: SCRATCH_TYPE.CIRCLE,
+  scratchType: SCRATCH_TYPE.SPRAY,
   containerWidth: scContainer.offsetWidth,
   containerHeight: 300,
   imageForwardSrc: '/images/scratchcard.jpg',
   imageBackgroundSrc: '/images/result.png',
   htmlBackground: '',
-  clearZoneRadius: 20,
-  nPoints: 0,
-  pointSize: 0,
+  clearZoneRadius: 50,
+  nPoints: 30,
+  pointSize: 4,
   callback: function () {
     alert('Now the window will reload !')
     window.location.reload()
