@@ -1,6 +1,6 @@
 # Brush
 
-<brush-brush></brush-brush>
+<brush-img></brush-img>
 
 :::warning
 The **brushSrc** is mandatory and the **clearZoneRadius** must be set to **0**.

@@ -6,7 +6,7 @@ module.exports = {
     { text: 'Home', link: '/' },
   ],
   port: 8088,
-  base: '/scratchcard-js/',
+  base: '/ScratchCard/',
   configureWebpack: {},
   themeConfig: {
     search: false,
@@ -23,7 +23,7 @@ module.exports = {
           { text: 'Html background', link: '/brushes/html-bg/' },
         ]
       },
-      { text: 'github', link: 'https://github.com/fluffy-factory/toolbox' },
+      { text: 'github', link: 'https://github.com/Masth0/ScratchCard' },
       { text: 'npm', link: 'https://www.npmjs.com/package/scratchcard-js' },
     ],
   }

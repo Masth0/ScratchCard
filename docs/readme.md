@@ -14,7 +14,7 @@ or just copy the file [scratchard.min.js](https://raw.githubusercontent.com/Mast
 ```js
 import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js';
 // or
-import 'scratchcard-js';
+import 'scratchcard-js'; 
 ```
 
 ## Configuration
@@ -24,9 +24,10 @@ See the SCRATCH_TYPES in action: [Spray](), [Circle](/brushes/circle), [Brush]()
 | **scratchType** | SCRATCH_TYPE | SPRAY | Possibles values : SPRAY, CIRCLE, BRUSH |
 | **containerWidth** | number | 100 |  |
 | **containerHeight** | number | 100 |  |
+| **brushSrc** | string | "" | For SCRATCH_TYPE.BRUSH |
 | **imageForwardSrc** | string | "" |  |
 | **imageBackgroundSrc** | string | "" |  |
-| **htmlBackground** | string | "" |  |
+| **htmlBackground** | string | "" | <br> ``` `<p>Html-content<p>` ``` |
 | **callback** | function | function() { alert('done.'); } |  |
 | **clearZoneRadius** | number | 0 | For SCRATCH_TYPE.CIRCLE |
 | **nPoints** | number | 30 | For SCRATCH_TYPE.SPRAY |

@@ -126,39 +126,39 @@
 </style>
 
 <script>
-    import '../../../build/scratchcard.min';
-
     export default {
       mounted() {
-        const scContainer = document.getElementById('js--sc--container')
-        const scInfos = document.querySelector('.sc__infos');
-        const sc = new ScratchCard('#js--sc--container', {
-          scratchType: SCRATCH_TYPE.CIRCLE,
-          containerWidth: scContainer.offsetWidth,
-          containerHeight: 300,
-          brushSrc: '',
-          imageForwardSrc: '/images/scratchcard.jpg',
-          imageBackgroundSrc: '',
-          htmlBackground: `<div class="inner_html"><p>Html content</p></div>`,
-          clearZoneRadius: 30,
-          nPoints: 50,
-          pointSize: 4,
-          callback: function () {
-            alert('Now the window will reload !')
-            window.location.reload()
-          }
-        })
-
-        // Init
-        sc.init().then(() => {
-          sc.canvas.addEventListener('scratch.move', () => {
-            let percent = sc.getPercent().toFixed(0);
-            scInfos.innerHTML = percent + '%';
-            console.log(percent)
+        import('../../../build/scratchcard.min').then(() => {
+          const scContainer = document.getElementById('js--sc--container')
+          const scInfos = document.querySelector('.sc__infos');
+          const sc = new ScratchCard('#js--sc--container', {
+            scratchType: SCRATCH_TYPE.CIRCLE,
+            containerWidth: scContainer.offsetWidth,
+            containerHeight: 300,
+            brushSrc: '',
+            imageForwardSrc: '/images/scratchcard.jpg',
+            imageBackgroundSrc: '',
+            htmlBackground: `<div class="inner_html"><p>Html content</p></div>`,
+            clearZoneRadius: 30,
+            nPoints: 50,
+            pointSize: 4,
+            callback: function () {
+              alert('Now the window will reload !')
+              window.location.reload()
+            }
           })
-        }).catch((error) => {
-          // image not loaded
-          alert(error.message);
+
+          // Init
+          sc.init().then(() => {
+            sc.canvas.addEventListener('scratch.move', () => {
+              let percent = sc.getPercent().toFixed(0);
+              scInfos.innerHTML = percent + '%';
+              console.log(percent)
+            })
+          }).catch((error) => {
+            // image not loaded
+            alert(error.message);
+          });
         });
       }
     }
