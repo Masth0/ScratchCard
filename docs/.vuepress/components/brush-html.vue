@@ -136,7 +136,7 @@
             containerWidth: scContainer.offsetWidth,
             containerHeight: 300,
             brushSrc: '',
-            imageForwardSrc: '/images/scratchcard.jpg',
+            imageForwardSrc: '../images/scratchcard.jpg',
             imageBackgroundSrc: '',
             htmlBackground: `<div class="inner_html"><p>Html content</p></div>`,
             clearZoneRadius: 30,
