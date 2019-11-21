@@ -28,7 +28,7 @@ class ScratchCard {
       percentToFinish: 50,
       nPoints: 100,
       pointSize: [10, 10],
-        callback: function() {
+      callback: function() {
           alert('done.')
       },
       brushSrc: '',
@@ -164,11 +164,11 @@ class ScratchCard {
       });
     });
   }
-  
+
   private generateCanvas (): void {
     this.canvas = document.createElement('canvas');
     this.canvas.classList.add('sc__canvas');
-  
+
     // Add canvas into container
     this.canvas.width = this.config.containerWidth;
     this.canvas.height = this.config.containerHeight;
@@ -180,7 +180,7 @@ class ScratchCard {
       injectHTML(this.config.htmlBackground, this.container);
     } else {
       let image = document.createElement('img');
-      loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {    
+      loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {
         image.src = img.src;
         this.container.insertBefore(image, this.canvas);
       }, (error: Error) => {
@@ -254,7 +254,7 @@ class ScratchCard {
 
     return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
   }
-  
+
   /**
    * Just clear the canvas
    */

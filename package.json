@@ -5,7 +5,9 @@
   "main": "./build/scratchcard.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development concurrently \"webpack\" \"webpack-dev-server\" ",
-    "build": "webpack"
+    "build": "webpack",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -24,12 +26,19 @@
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
+    "@vuepress/plugin-active-header-links": "^1.2.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
     "cross-env": "^5.2.0",
+    "css-loader": "^3.2.0",
+    "node-sass": "^4.13.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.1",
+    "vuepress": "^1.2.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.4"
