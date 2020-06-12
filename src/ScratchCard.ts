@@ -34,6 +34,7 @@ class ScratchCard {
       brushSrc: '',
       imageForwardSrc: './images/scratchcard.png',
       imageBackgroundSrc: './images/scratchcard-background.svg',
+      imageBackgroundClippingPath: undefined,
       htmlBackground: '',
       clearZoneRadius: 0,
       enabledPercentUpdate: true,
@@ -53,7 +54,7 @@ class ScratchCard {
     this.ctx = this.canvas.getContext('2d');
 
     // Init the brush instance
-    this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
+    this.brush = new Brush(this.ctx, this.position[0], this.position[1], this.config.imageBackgroundClippingPath);
 
     // Init the brush if  necessary
     if (this.config.scratchType === SCRATCH_TYPE.BRUSH) {
