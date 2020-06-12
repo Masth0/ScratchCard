@@ -125,7 +125,7 @@ class ScratchCard {
    */
   private _setScratchPosition () {
     this.zone = getOffset(this.canvas);
-    console.log(this.zone);
+  // console.log(this.zone);
   }
 
   finish () {
