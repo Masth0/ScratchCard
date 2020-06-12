@@ -1,12 +1,33 @@
 export default class Brush {
   readonly ctx: CanvasRenderingContext2D;
+  private clippingPath?: Path2D;
   public mouseX: number;
   public mouseY: number;
 
-  constructor (ctx: CanvasRenderingContext2D, mouseX: number, mouseY: number) {
+  constructor (ctx: CanvasRenderingContext2D, mouseX: number, mouseY: number, clippingPath?: Path2D) {
     this.ctx = ctx;
     this.mouseX = mouseX;
     this.mouseY = mouseY;
+    this.clippingPath = clippingPath;
+  }
+
+  startClipping() {
+    if (!this.clippingPath) {
+      return;
+    }
+    
+    this.ctx.save();
+
+    this.ctx.beginPath();
+    this.ctx.clip(this.clippingPath);
+  }
+
+  endClipping() {
+    if (!this.clippingPath) {
+      return;
+    }
+
+    this.ctx.restore();
   }
 
   updateMousePosition (x: number, y: number) {
@@ -15,11 +36,15 @@ export default class Brush {
   }
 
   circle (r: number) {
+    this.startClipping();
+
     this.ctx.beginPath();
     this.ctx.arc(this.mouseX + r, this.mouseY + r, r, 0, Math.PI * 2, false);
     this.ctx.fillStyle = '#000000';
     this.ctx.fill();
     this.ctx.closePath();
+
+    this.endClipping();
   }
 
   /**
@@ -52,11 +77,16 @@ export default class Brush {
 
     for (i; i < dropsCount; i++) {
       let points = this.clearPoint(area / 2);
+
+      this.startClipping();
+
       this.ctx.beginPath();
       this.ctx.arc(points[0] + (area / 2), points[1] + (area / 2), dropsSize / 2, 0, Math.PI * 2, false);
       this.ctx.fillStyle = '#000000';
       this.ctx.fill();
       this.ctx.closePath();
+
+      this.endClipping();
     }
   }
 
@@ -71,10 +101,15 @@ export default class Brush {
       return;
     }
     let angle = Math.atan2(this.mouseY, this.mouseX);
+
+    this.startClipping();
+
     this.ctx.save();
     this.ctx.translate(this.mouseX, this.mouseY);
     this.ctx.rotate(angle);
     this.ctx.drawImage(img, -(img.width / 2), -(img.height / 2));
+
+    this.endClipping();
   }
 
 }

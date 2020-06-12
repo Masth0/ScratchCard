@@ -10,6 +10,7 @@ export interface SC_CONFIG {
   containerHeight: number,
   imageForwardSrc: string,
   imageBackgroundSrc: string,
+  imageBackgroundClippingPath?: Path2D,
   htmlBackground: string,
   clearZoneRadius: number,
   nPoints: number,
@@ -17,10 +18,10 @@ export interface SC_CONFIG {
   percentToFinish: number
   callback ?: () => void,
   brushSrc: string,
-  cursor: {
+  cursor?: {
     cur: string,
     png: string,
     poosition: number[]
   },
-  enabledPercentUpdate: boolean
+  enabledPercentUpdate?: boolean
 }
