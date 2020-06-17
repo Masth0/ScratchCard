@@ -1,7 +1,8 @@
 export enum SCRATCH_TYPE {
   BRUSH,
   SPRAY,
-  CIRCLE
+  CIRCLE,
+  LINE
 }
 
 export interface SC_CONFIG {

@@ -77,4 +77,18 @@ export default class Brush {
     this.ctx.drawImage(img, -(img.width / 2), -(img.height / 2));
   }
 
+  startLine (r: number) {
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = 'black';
+    this.ctx.lineWidth = r;
+    this.ctx.lineJoin = this.ctx.lineCap = 'round';
+    this.ctx.moveTo(this.mouseX + r , this.mouseY + r);
+  }
+
+  drawLine (r: number) {
+    this.ctx.filter = 'blur(1px)';
+    this.ctx.lineTo(this.mouseX + r , this.mouseY + r);
+    this.ctx.stroke();
+  }
+
 }

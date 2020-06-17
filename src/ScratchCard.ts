@@ -1,22 +1,21 @@
-import {SC_CONFIG} from './ScratchCardConfig';
-import {SCRATCH_TYPE} from './ScratchCardConfig';
-import { loadImage, throttle, dispatchCustomEvent, injectHTML, getOffset } from './utils'
 import Brush from './Brush';
+import { SC_CONFIG, SCRATCH_TYPE } from './ScratchCardConfig';
+import { dispatchCustomEvent, getOffset, injectHTML, loadImage, throttle } from './utils'
 
 class ScratchCard {
   readonly config: SC_CONFIG;
-  private position: number[];
   readonly scratchType: SCRATCH_TYPE;
-  public brushImage: any;
   readonly ctx: CanvasRenderingContext2D;
   readonly container: HTMLElement;
-  private defaults: SC_CONFIG;
-  private scratchImage: HTMLImageElement;
-  public zone: {top: number, left: number};
+  private position: number[];
   private canvas: HTMLCanvasElement;
   private readyToClear: Boolean;
   private brush: Brush;
   private callbackDone: Boolean;
+  private defaults: SC_CONFIG;
+  private scratchImage: HTMLImageElement;
+  public brushImage: any;
+  public zone: {top: number, left: number};
   public percent: number;
 
   constructor (selector: string, config: SC_CONFIG) {
@@ -80,8 +79,16 @@ class ScratchCard {
     this.canvas.addEventListener('mousedown', function (event) {
       event.preventDefault();
       self._setScratchPosition();
+
+      if (self.scratchType === SCRATCH_TYPE.LINE) {
+        self.position = self.mousePosition(event);
+        self.brush.updateMousePosition(self.position[0], self.position[1]);
+        self.brush.startLine(self.config.clearZoneRadius);
+      }
+
       self.canvas.addEventListener('mousemove', scratching);
-      document.body.addEventListener('mouseup', function _func () {
+
+      document.body.addEventListener('mouseup', function _func (e) {
         self.canvas.removeEventListener('mousemove', scratching);
         self.finish(); // clear and callback
         this.removeEventListener('mouseup', _func);
@@ -225,6 +232,9 @@ class ScratchCard {
         break;
       case SCRATCH_TYPE.SPRAY:
         this.brush.spray(this.config.clearZoneRadius, this.config.pointSize,  this.config.nPoints);
+        break;
+      case SCRATCH_TYPE.LINE:
+        this.brush.drawLine(this.config.clearZoneRadius);
         break;
     }
 
