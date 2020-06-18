@@ -21,12 +21,12 @@ class ScratchCard {
   constructor (selector: string, config: SC_CONFIG) {
     const self = this;
     const defaults = {
-      scratchType: SCRATCH_TYPE.SPRAY,
+      scratchType: SCRATCH_TYPE.LINE,
       containerWidth: 100,
       containerHeight: 100,
       percentToFinish: 50,
-      nPoints: 100,
-      pointSize: [10, 10],
+      nPoints: 0,
+      pointSize: [0, 0],
       callback: function() {
           alert('done.')
       },
