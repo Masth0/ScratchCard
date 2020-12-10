@@ -99,6 +99,13 @@ class ScratchCard {
     this.canvas.addEventListener('touchstart', function (event) {
       event.preventDefault();
       self._setScratchPosition();
+
+      if (self.scratchType === SCRATCH_TYPE.LINE) {
+        self.position = self.mousePosition(event);
+        self.brush.updateMousePosition(self.position[0], self.position[1]);
+		self.brush.startLine(self.config.clearZoneRadius);
+	  }
+	  
       self.canvas.addEventListener('touchmove', scratching);
       document.body.addEventListener('touchend', function _func () {
         self.canvas.removeEventListener('touchmove', scratching);
