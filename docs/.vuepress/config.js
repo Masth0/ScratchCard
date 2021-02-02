@@ -17,6 +17,7 @@ module.exports = {
         text: 'Brushes',
         ariaLabel: 'Brushes menu',
         items: [
+          { text: 'Line', link: '/brushes/line/' },
           { text: 'Spray', link: '/brushes/spray/' },
           { text: 'Circle', link: '/brushes/circle/' },
           { text: 'Brush', link: '/brushes/brush/' },

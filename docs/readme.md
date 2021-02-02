@@ -18,10 +18,10 @@ import 'scratchcard-js';
 ```
 
 ## Configuration
-See the SCRATCH_TYPES in action: [Spray](), [Circle](/brushes/circle), [Brush]()
+See the SCRATCH_TYPES in action: [Line](/brushes/line), [Spray](/brushes/spray), [Circle](/brushes/circle), [Brush](/brushes/brush)
 | Name  | Type | Default value | Comment |
 |---|---|---|---|
-| **scratchType** | SCRATCH_TYPE | SPRAY | Possibles values : SPRAY, CIRCLE, BRUSH |
+| **scratchType** | SCRATCH_TYPE | LINE | Possibles values : LINE, SPRAY, CIRCLE, BRUSH |
 | **containerWidth** | number | 100 |  |
 | **containerHeight** | number | 100 |  |
 | **brushSrc** | string | "" | For SCRATCH_TYPE.BRUSH |
@@ -29,7 +29,7 @@ See the SCRATCH_TYPES in action: [Spray](), [Circle](/brushes/circle), [Brush]()
 | **imageBackgroundSrc** | string | "" |  |
 | **htmlBackground** | string | "" | <br> ``` `<p>Html-content<p>` ``` |
 | **callback** | function | function() { alert('done.'); } |  |
-| **clearZoneRadius** | number | 0 | For SCRATCH_TYPE.CIRCLE |
+| **clearZoneRadius** | number | 0 | For SCRATCH_TYPE.CIRCLE and SCRATCH_TYPE.LINE |
 | **nPoints** | number | 30 | For SCRATCH_TYPE.SPRAY |
 | **pointSize** | number | 4 | For SCRATCH_TYPE.SPRAY |
 
