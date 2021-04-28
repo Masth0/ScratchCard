@@ -24,6 +24,7 @@ See the SCRATCH_TYPES in action: [Line](/brushes/line), [Spray](/brushes/spray),
 | **scratchType** | SCRATCH_TYPE | LINE | Possibles values : LINE, SPRAY, CIRCLE, BRUSH |
 | **containerWidth** | number | 100 |  |
 | **containerHeight** | number | 100 |  |
+| **popUp** | boolean | false | For popup model scratchcard |
 | **brushSrc** | string | "" | For SCRATCH_TYPE.BRUSH |
 | **imageForwardSrc** | string | "" |  |
 | **imageBackgroundSrc** | string | "" |  |

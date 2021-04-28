@@ -27,6 +27,7 @@ class ScratchCard {
       percentToFinish: 50,
       nPoints: 0,
       pointSize: [0, 0],
+      popUp: false,
       callback: function() {
           alert('done.')
       },
@@ -45,6 +46,7 @@ class ScratchCard {
     this.readyToClear = false;
     this.percent = 0;
     this.callbackDone = false;
+
 
     // Create and add the canvas
     this.generateCanvas();
@@ -162,21 +164,40 @@ class ScratchCard {
     dispatchCustomEvent(this.canvas, `${phase}.${type}`, {});
   }
 
-  init (): Promise<any> {
+  // if popup != true then display component.
+  // if popup = true dont display the component immediately, 
+  //  but after calling sc.setPopUpDisplayState(true)
+  //  and sc.setPopUpDisplayState(false) for closing the popup.
+  init (display?:boolean): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
-      loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
-        this.scratchImage = img;
-        this.ctx.drawImage(this.scratchImage, 0, 0, this.canvas.width, this.canvas.height);
-        this.setBackground();
-        // Resolve the promise init
-        resolve();
-      }, (event: Event): Error => {
-        // Reject init
-        reject(event);
-        return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
-      });
+      if (this.config.popUp === false || display) {  
+        loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
+          this.scratchImage = img;
+          this.ctx.drawImage(this.scratchImage, 0, 0, this.canvas.width, this.canvas.height);
+          this.setBackground();
+          // Resolve the promise init
+          resolve();
+        }, (event: Event): Error => {
+          // Reject init
+          reject(event);
+          return new TypeError(`${this.config.imageForwardSrc} is not loaded.`);
+        });
+      }
     });
   }
+
+  // popUp show and hide whenever user needs
+  // setPopUpDisplayState(true) -> shows the scratchcard
+  // setPopUpDisplayState(true) -> hides the scratchcard
+
+   setPopUpDisplayState (display: boolean) : void {
+      if (this.config.popUp && display === true) {
+        this.init(true);
+        this.container.style.removeProperty('display');
+      } else if (this.config.popUp && display === false) {
+        this.container.style.display = 'none';
+      }
+    }
 
   private generateCanvas (): void {
     this.canvas = document.createElement('canvas');

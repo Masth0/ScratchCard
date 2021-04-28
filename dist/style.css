@@ -1,137 +1,136 @@
 @keyframes move {
-  from {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-    transform: translateY(100px);
-  }
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(100px);
+    }
 }
 
 #js--sc--container {
-  position: relative;
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
-  border: 1px solid black;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  transform: translateY(100px);
-  opacity: 1;
-  animation: move 2s;
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transform: translateY(100px);
+    opacity: 1;
+    animation: move 2s;
 }
 
 #js--sc--container:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("./images/loader.gif");
-  background-repeat: no-repeat;
-  background-position: center center;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./images/loader.gif");
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 #js--sc--container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #js--sc--container img {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #js-debug-cursor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: yellow;
-  width: 50px;
-  height: 50px;
-  z-index: 99;
-  will-change: transform;
-  -webkit-transition-duration: 300ms;
-  transition-duration: 300ms;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: yellow;
+    width: 50px;
+    height: 50px;
+    z-index: 99;
+    will-change: transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
 }
 
 .sc__wrapper {
-  display: block;
-  width: 100%;
-  height: 300px;
-  max-width: 300px;
-  margin: 0 auto;
-  border: 5px solid rgba(#FFF, 0.5);
+    display: block;
+    width: 100%;
+    height: 300px;
+    max-width: 300px;
+    margin: 0 auto;
+    border: 5px solid rgba(#fff, 0.5);
 }
 
- /* Where the scratchcard will be generate. */
+/* Where the scratchcard will be generate. */
 .sc__container {
-  position: relative;
-  overflow: hidden;
-  max-height: 300px;
-  max-width: 300px;
+    position: relative;
+    overflow: hidden;
+    max-height: 300px;
+    max-width: 300px;
 }
 
 .sc__inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
- /* Background image, the result... */
+/* Background image, the result... */
 .sc__container > img {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
 }
 
- /* The scratchcard generate with scratchcard-js */
+/* The scratchcard generate with scratchcard-js */
 .sc__container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
 }
 
- /* Scratchcard informations */
+/* Scratchcard informations */
 .sc__infos {
-  text-align: center;
-  height: 40px;
-  line-height: 40px;
-  margin-top: 5px;
-  font-weight: bold;
-  font-size: 16px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .test {
-  color: lightsalmon;
-  font-size: 20px;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: white;
+    color: lightsalmon;
+    font-size: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: white;
 }

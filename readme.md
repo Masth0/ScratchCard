@@ -30,6 +30,7 @@ const sc = new ScratchCard('#js--sc--container', {
   imageForwardSrc: '/images/scratchcard.jpg',
   imageBackgroundSrc: '/images/result.png',
   htmlBackground: '<p class="test"><strong>Hello i am HTML content !</strong></p>',
+  popUp: false,
   clearZoneRadius: 50,
   nPoints: 30,
   pointSize: 4,

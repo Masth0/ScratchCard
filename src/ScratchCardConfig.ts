@@ -9,6 +9,7 @@ export interface SC_CONFIG {
   scratchType: SCRATCH_TYPE,
   containerWidth: number,
   containerHeight: number,
+  popUp: boolean,
   imageForwardSrc: string,
   imageBackgroundSrc: string,
   htmlBackground: string,
