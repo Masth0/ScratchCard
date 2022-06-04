@@ -23,6 +23,10 @@ and pick in the folder **./build** the file **scratchard.min.js**
 import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js'
 
 const scContainer = document.getElementById('js--sc--container')
+
+// You also can pass HTML Element or a string for querySelector
+// new ScratchCard(htmlElement...
+
 const sc = new ScratchCard('#js--sc--container', {
   scratchType: SCRATCH_TYPE.SPRAY,
   containerWidth: scContainer.offsetWidth,
