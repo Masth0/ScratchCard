@@ -40,7 +40,7 @@ class ScratchCard {
 
     this.config = {...defaults, ...config};
     this.scratchType = this.config.scratchType;
-    this.container = typeof selector === 'string' || selector instanceof String ? 
+    this.container = (typeof selector === 'string' || selector instanceof String) ? 
       document.querySelector(String(selector)) : selector;
     this.position = [0, 0]; // init position
     this.readyToClear = false;
