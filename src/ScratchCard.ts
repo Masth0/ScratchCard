@@ -40,8 +40,10 @@ class ScratchCard {
 
     this.config = {...defaults, ...config};
     this.scratchType = this.config.scratchType;
-    this.container = (typeof selector === 'string' || selector instanceof String) ? 
-      document.querySelector(String(selector)) : selector;
+    this.container = <HTMLElement> (
+      this.isString(selector) ? 
+        document.querySelector(String(selector)) : selector
+      );
     this.position = [0, 0]; // init position
     this.readyToClear = false;
     this.percent = 0;
@@ -124,6 +126,16 @@ class ScratchCard {
     window.addEventListener('scroll', throttle(() => {
       this._setScratchPosition();
     }, 16));
+  }
+
+
+  /**
+   * Check if selector is a string
+   * @param selector 
+   * @returns {boolean}
+   */
+  isString(selector: string|HTMLElement): boolean {
+    return (typeof selector === 'string' || selector instanceof String)
   }
 
   /**
