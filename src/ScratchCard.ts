@@ -18,7 +18,7 @@ class ScratchCard {
   public zone: {top: number, left: number};
   public percent: number;
 
-  constructor (selector: string, config: SC_CONFIG) {
+  constructor (selector: string|HTMLElement, config: SC_CONFIG) {
     const self = this;
     const defaults = {
       scratchType: SCRATCH_TYPE.LINE,
@@ -40,7 +40,7 @@ class ScratchCard {
 
     this.config = {...defaults, ...config};
     this.scratchType = this.config.scratchType;
-    this.container = <HTMLElement> document.querySelector(selector);
+    this.container = selector instanceof HTMLElement ? selector : <HTMLElement> document.querySelector(selector);
     this.position = [0, 0]; // init position
     this.readyToClear = false;
     this.percent = 0;
