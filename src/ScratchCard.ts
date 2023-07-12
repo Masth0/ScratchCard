@@ -18,7 +18,7 @@ class ScratchCard {
   public zone: {top: number, left: number};
   public percent: number;
 
-  constructor (selector: string, config: SC_CONFIG) {
+  constructor (selector: string|HTMLElement, config: SC_CONFIG) {
     const self = this;
     const defaults = {
       scratchType: SCRATCH_TYPE.LINE,
@@ -40,7 +40,10 @@ class ScratchCard {
 
     this.config = {...defaults, ...config};
     this.scratchType = this.config.scratchType;
-    this.container = <HTMLElement> document.querySelector(selector);
+    this.container = <HTMLElement> (
+      this.isString(selector) ? 
+        document.querySelector(String(selector)) : selector
+      );
     this.position = [0, 0]; // init position
     this.readyToClear = false;
     this.percent = 0;
@@ -123,6 +126,16 @@ class ScratchCard {
     window.addEventListener('scroll', throttle(() => {
       this._setScratchPosition();
     }, 16));
+  }
+
+
+  /**
+   * Check if selector is a string
+   * @param selector 
+   * @returns {boolean}
+   */
+  isString(selector: string|HTMLElement): boolean {
+    return (typeof selector === 'string' || selector instanceof String)
   }
 
   /**
