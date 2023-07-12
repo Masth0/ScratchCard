@@ -71,7 +71,7 @@
         import('../../../build/scratchcard.min').then(() => {
           const scContainer = document.getElementById('js--sc--container')
           const scInfos = document.querySelector('.sc__infos');
-          const sc = new ScratchCard('#js--sc--container', {
+          const sc = new ScratchCard(scContainer, {
             scratchType: SCRATCH_TYPE.BRUSH,
             containerWidth: scContainer.offsetWidth,
             containerHeight: 300,

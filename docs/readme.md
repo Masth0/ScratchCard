@@ -18,6 +18,26 @@ import 'scratchcard-js';
 ```
 
 ## Configuration
+::: Tip
+The first argument of the ScratchCard instance can be a string or an HTMLElement.
+:::
+
+```js{2}
+const scContainer = document.getElementById('js--sc--container');
+const sc = new ScratchCard(scContainer, {
+    scratchType: SCRATCH_TYPE.LINE,
+    containerWidth: scContainer.offsetWidth,
+    containerHeight: 300,
+    imageForwardSrc: '/images/scratchcard.jpg',
+    imageBackgroundSrc: '/images/result.png',
+    htmlBackground: '',
+    clearZoneRadius: 20,
+    nPoints: 0,
+    pointSize: 0,
+    callback: function () {}
+})
+```
+
 See the SCRATCH_TYPES in action: [Line](/brushes/line), [Spray](/brushes/spray), [Circle](/brushes/circle), [Brush](/brushes/brush)
 | Name  | Type | Default value | Comment |
 |---|---|---|---|
