@@ -3,6 +3,8 @@
     "noImplicitAny": true,
     "sourceMap": false,
     "target": "es6",
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "declaration": true,
+    "declarationDir": "./types"
   }
 }

@@ -18,10 +18,5 @@ export interface SC_CONFIG {
   percentToFinish: number
   callback ?: () => void,
   brushSrc: string,
-  cursor: {
-    cur: string,
-    png: string,
-    poosition: number[]
-  },
   enabledPercentUpdate: boolean
 }
