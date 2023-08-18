@@ -1,14 +1,18 @@
 import Brush from './Brush';
 import { SC_CONFIG, SCRATCH_TYPE } from './ScratchCardConfig';
 import { dispatchCustomEvent, getOffset, injectHTML, loadImage, throttle } from './utils'
+import * as console from "console";
 
 class ScratchCard {
+  get canvas(): HTMLCanvasElement {
+    return this._canvas;
+  }
   readonly config: SC_CONFIG;
   readonly scratchType: SCRATCH_TYPE;
   readonly ctx: CanvasRenderingContext2D;
   readonly container: HTMLElement;
   private position: number[];
-  private canvas: HTMLCanvasElement;
+  private _canvas: HTMLCanvasElement;
   private readyToClear: Boolean;
   private brush: Brush;
   private callbackDone: Boolean;
@@ -52,7 +56,7 @@ class ScratchCard {
     // Create and add the canvas
     this.generateCanvas();
 
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this._canvas.getContext('2d');
 
     // Init the brush instance
     this.brush = new Brush(this.ctx, this.position[0], this.position[1]);
@@ -79,7 +83,7 @@ class ScratchCard {
     }, 16);
 
     /*---- Events -----------------------------------------------------------------------*/
-    this.canvas.addEventListener('mousedown', function (event) {
+    this._canvas.addEventListener('mousedown', function (event) {
       event.preventDefault();
       self._setScratchPosition();
 
@@ -89,17 +93,17 @@ class ScratchCard {
         self.brush.startLine(self.config.clearZoneRadius);
       }
 
-      self.canvas.addEventListener('mousemove', scratching);
+      self._canvas.addEventListener('mousemove', scratching);
 
       document.body.addEventListener('mouseup', function _func (e) {
-        self.canvas.removeEventListener('mousemove', scratching);
+        self._canvas.removeEventListener('mousemove', scratching);
         self.finish(); // clear and callback
         this.removeEventListener('mouseup', _func);
       });
     });
 
     // Mobile events
-    this.canvas.addEventListener('touchstart', function (event) {
+    this._canvas.addEventListener('touchstart', function (event) {
       event.preventDefault();
       self._setScratchPosition();
 
@@ -109,9 +113,9 @@ class ScratchCard {
 		    self.brush.startLine(self.config.clearZoneRadius);
 	    }
 
-      self.canvas.addEventListener('touchmove', scratching);
+      self._canvas.addEventListener('touchmove', scratching);
       document.body.addEventListener('touchend', function _func () {
-        self.canvas.removeEventListener('touchmove', scratching);
+        self._canvas.removeEventListener('touchmove', scratching);
         self.finish(); // clear and callback
         this.removeEventListener('touchend', _func);
       });
@@ -151,14 +155,14 @@ class ScratchCard {
    * @private
    */
   private _setScratchPosition () {
-    this.zone = getOffset(this.canvas);
+    this.zone = getOffset(this._canvas);
   }
 
   finish () {
     // Exec the callback once
     if (!this.callbackDone && this.percent > this.config.percentToFinish) {
       this.clear();
-      this.canvas.style.pointerEvents = 'none';
+      this._canvas.style.pointerEvents = 'none';
       if (this.config.callback !== undefined) {
         this.callbackDone = true;
         this.config.callback();
@@ -172,14 +176,14 @@ class ScratchCard {
    * @param {string} type
    */
   dispatchEvent (phase: string, type: string) {
-    dispatchCustomEvent(this.canvas, `${phase}.${type}`, {});
+    dispatchCustomEvent(this._canvas, `${phase}.${type}`, {});
   }
 
   init (): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
       loadImage(this.config.imageForwardSrc).then((img: HTMLImageElement) => {
         this.scratchImage = img;
-        this.ctx.drawImage(this.scratchImage, 0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(this.scratchImage, 0, 0, this._canvas.width, this._canvas.height);
         this.setBackground();
         // Resolve the promise init
         resolve();
@@ -192,13 +196,13 @@ class ScratchCard {
   }
 
   private generateCanvas (): void {
-    this.canvas = document.createElement('canvas');
-    this.canvas.classList.add('sc__canvas');
+    this._canvas = document.createElement('canvas');
+    this._canvas.classList.add('sc__canvas');
 
     // Add canvas into container
-    this.canvas.width = this.config.containerWidth;
-    this.canvas.height = this.config.containerHeight;
-    this.container.appendChild(this.canvas);
+    this._canvas.width = this.config.containerWidth;
+    this._canvas.height = this.config.containerHeight;
+    this.container.appendChild(this._canvas);
   }
 
   private setBackground (): void {
@@ -208,7 +212,7 @@ class ScratchCard {
       let image = document.createElement('img');
       loadImage(this.config.imageBackgroundSrc).then((img: HTMLImageElement) => {
         image.src = img.src;
-        this.container.insertBefore(image, this.canvas);
+        this.container.insertBefore(image, this._canvas);
       }, (error: Error) => {
         // Stop all script here
         console.log(error.message);
@@ -270,7 +274,7 @@ class ScratchCard {
   * */
   updatePercent (): number {
     let counter = 0; // number of pixels cleared
-    let imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    let imageData = this.ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
     let imageDataLength = imageData.data.length;
 
     // loop data image drop every 4 items [r, g, b, a, ...]
@@ -281,14 +285,14 @@ class ScratchCard {
       }
     }
 
-    return (counter >= 1) ? (counter / (this.canvas.width * this.canvas.height)) * 100 : 0;
+    return (counter >= 1) ? (counter / (this._canvas.width * this._canvas.height)) * 100 : 0;
   }
 
   /**
    * Just clear the canvas
    */
   clear (): void {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
   }
 
 }
