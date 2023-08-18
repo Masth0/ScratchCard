@@ -1,11 +1,12 @@
 import { SC_CONFIG, SCRATCH_TYPE } from './ScratchCardConfig';
 declare class ScratchCard {
+    get canvas(): HTMLCanvasElement;
     readonly config: SC_CONFIG;
     readonly scratchType: SCRATCH_TYPE;
     readonly ctx: CanvasRenderingContext2D;
     readonly container: HTMLElement;
     private position;
-    private canvas;
+    private _canvas;
     private readyToClear;
     private brush;
     private callbackDone;
