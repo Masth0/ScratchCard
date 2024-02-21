@@ -37,6 +37,8 @@ const sc = new ScratchCard('#js--sc--container', {
   clearZoneRadius: 50,
   nPoints: 30,
   pointSize: 4,
+  enabledPercentUpdate: true, // True by default
+  percentToFinish: 50, // enabledPercentUpdate must to be true (true by default)
   callback: function () {
     alert('Now the window will reload !')
     window.location.reload()

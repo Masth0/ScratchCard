@@ -30,10 +30,12 @@ const sc = new ScratchCard(scContainer, {
     containerHeight: 300,
     imageForwardSrc: '/images/scratchcard.jpg',
     imageBackgroundSrc: '/images/result.png',
-    htmlBackground: '',
+    htmlBackground: '', // '<p>Html-content<p>'
     clearZoneRadius: 20,
     nPoints: 0,
     pointSize: 0,
+    enabledPercentUpdate: true,
+    percentToFinish: 50, // enabledPercentUpdate must to be true
     callback: function () {}
 })
 ```
@@ -52,6 +54,8 @@ See the SCRATCH_TYPES in action: [Line](/brushes/line), [Spray](/brushes/spray),
 | **clearZoneRadius** | number | 0 | For SCRATCH_TYPE.CIRCLE and SCRATCH_TYPE.LINE |
 | **nPoints** | number | 30 | For SCRATCH_TYPE.SPRAY |
 | **pointSize** | number | 4 | For SCRATCH_TYPE.SPRAY |
+| **enabledPercentUpdate** | boolean | true | See **percentToFinish**|
+| **percentToFinish** | number | 50 | Percentage of pixels to erase before clearing the canvas on mouseup |
 
 ## Initialization method
 ```js
